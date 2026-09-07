@@ -1,421 +1,849 @@
 <!DOCTYPE html>
+
 <html lang="es">
 
 <head>
 
-    <meta charset="UTF-8">
+```
+<meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Cómo funciona | AirMouse</title>
-
-
-    <style>
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<title>Cómo funciona | AirMouse</title>
 
 
-        html {
-            scroll-behavior: smooth;
-        }
+<style>
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        cursor: none !important;
+    }
 
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #080a0f;
-            color: white;
-        }
+    html,
+    html *,
+    body,
+    body * {
+        cursor: none !important;
+    }
 
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+    html {
+        scroll-behavior: smooth;
+        cursor: none !important;
+    }
 
 
-        /* =========================
-           MENÚ
-        ========================= */
+    /* =========================
+       VARIABLES
+    ========================= */
+
+    :root {
+        --background: #080a0f;
+        --nav-background: rgba(8, 10, 15, 0.95);
+        --card-background: #10131a;
+        --border: #252a35;
+        --card-border: #272c37;
+        --text: white;
+        --secondary-text: #a9adb8;
+        --paragraph: #9297a4;
+        --button-background: #7c5cff;
+        --button-hover: #9278ff;
+        --menu-background: rgba(8, 10, 15, 0.98);
+        --menu-hover: #11141c;
+    }
+
+
+    body.light-theme {
+        --background: #f4f5f8;
+        --nav-background: rgba(244, 245, 248, 0.95);
+        --card-background: #ffffff;
+        --border: #dfe2e8;
+        --card-border: #d9dce3;
+        --text: #17191f;
+        --secondary-text: #606572;
+        --paragraph: #686d79;
+        --button-background: #7c5cff;
+        --button-hover: #9278ff;
+        --menu-background: rgba(244, 245, 248, 0.98);
+        --menu-hover: #e9ebf0;
+    }
+
+
+    body {
+        font-family: Arial, sans-serif;
+
+        background: var(--background);
+
+        color: var(--text);
+
+        cursor: none !important;
+
+        transition:
+            background 0.35s ease,
+            color 0.35s ease;
+    }
+
+
+    a,
+    button,
+    input,
+    label,
+    .button,
+    .switch,
+    .slider,
+    .step,
+    .back,
+    .menu-button,
+    .menu a {
+        cursor: none !important;
+    }
+
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+
+    /* =========================
+       CURSOR PERSONALIZADO
+    ========================= */
+
+    .custom-cursor {
+        position: fixed;
+
+        top: 0;
+        left: 0;
+
+        width: 0;
+        height: 0;
+
+        pointer-events: none !important;
+
+        z-index: 2147483647;
+
+        opacity: 0;
+
+        cursor: none !important;
+
+        will-change: transform;
+    }
+
+
+    .custom-cursor *,
+    .custom-cursor::before,
+    .custom-cursor::after {
+        pointer-events: none !important;
+        cursor: none !important;
+    }
+
+
+    .cursor-dot {
+        position: absolute;
+
+        width: 7px;
+        height: 7px;
+
+        background: #ffffff;
+
+        border-radius: 50%;
+
+        transform: translate(-50%, -50%);
+
+        box-shadow:
+            0 0 8px rgba(124, 92, 255, 0.9);
+    }
+
+
+    .cursor-ring {
+        position: absolute;
+
+        width: 32px;
+        height: 32px;
+
+        border: 2px solid #7c5cff;
+
+        border-radius: 50%;
+
+        transform: translate(-50%, -50%);
+
+        transition:
+            width 0.2s ease,
+            height 0.2s ease,
+            border-color 0.2s ease,
+            background 0.2s ease;
+    }
+
+
+    .custom-cursor.hovering .cursor-ring {
+        width: 45px;
+        height: 45px;
+
+        border-color: #9278ff;
+
+        background: rgba(124, 92, 255, 0.08);
+    }
+
+
+    .custom-cursor.card-hover .cursor-ring {
+        width: 50px;
+        height: 50px;
+    }
+
+
+    .custom-cursor.clicking .cursor-ring {
+        width: 25px;
+        height: 25px;
+
+        background: rgba(124, 92, 255, 0.18);
+    }
+
+
+    /* =========================
+       MENÚ
+    ========================= */
+
+    nav {
+        position: sticky;
+        top: 0;
+
+        width: 100%;
+
+        padding: 18px 7%;
+
+        display: flex;
+
+        justify-content: space-between;
+        align-items: center;
+
+        background: var(--nav-background);
+
+        border-bottom: 1px solid var(--border);
+
+        z-index: 1000;
+
+        backdrop-filter: blur(12px);
+    }
+
+
+    .logo {
+        font-size: 24px;
+
+        font-weight: bold;
+
+        letter-spacing: 1px;
+    }
+
+
+    .logo span {
+        color: #7c5cff;
+    }
+
+
+    .menu {
+        display: flex;
+
+        align-items: center;
+
+        gap: 25px;
+    }
+
+
+    .menu a {
+        color: var(--secondary-text);
+
+        font-size: 14px;
+
+        transition: 0.3s;
+    }
+
+
+    .menu a:hover {
+        color: var(--text);
+    }
+
+
+    /* =========================
+       SWITCH DE TEMA
+    ========================= */
+
+    .theme-switch {
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+    }
+
+
+    .switch {
+        position: relative;
+
+        display: inline-block;
+
+        width: 64px;
+        height: 32px;
+    }
+
+
+    .switch input {
+        opacity: 0;
+
+        width: 0;
+        height: 0;
+
+        position: absolute;
+    }
+
+
+    .slider {
+        position: absolute;
+
+        inset: 0;
+
+        background: #1c2030;
+
+        border: 1px solid #343946;
+
+        border-radius: 50px;
+
+        overflow: hidden;
+
+        transition: 0.4s;
+
+        cursor: none !important;
+    }
+
+
+    .slider::before {
+        content: "";
+
+        position: absolute;
+
+        width: 25px;
+        height: 25px;
+
+        left: 3px;
+        top: 2px;
+
+        border-radius: 50%;
+
+        background: #f5f5f5;
+
+        transition: 0.4s;
+
+        z-index: 4;
+    }
+
+
+    .switch input:checked + .slider {
+        background: #87ceeb;
+    }
+
+
+    .switch input:checked + .slider::before {
+        transform: translateX(31px);
+
+        background: #ffd85c;
+    }
+
+
+    /* NUBES */
+
+    .cloud {
+        position: absolute;
+
+        background: #ffffff;
+
+        border-radius: 50%;
+
+        opacity: 0;
+
+        transition: 0.4s;
+    }
+
+
+    .cloud-1 {
+        width: 17px;
+        height: 9px;
+
+        right: 7px;
+        bottom: 6px;
+    }
+
+
+    .cloud-2 {
+        width: 12px;
+        height: 12px;
+
+        right: 16px;
+        bottom: 7px;
+    }
+
+
+    .cloud-3 {
+        width: 10px;
+        height: 10px;
+
+        right: 23px;
+        bottom: 6px;
+    }
+
+
+    .switch input:checked + .slider .cloud {
+        opacity: 1;
+    }
+
+
+    /* LUNA */
+
+    .moon {
+        position: absolute;
+
+        width: 18px;
+        height: 18px;
+
+        left: 7px;
+        top: 6px;
+
+        background: #f5f5f5;
+
+        border-radius: 50%;
+
+        transition: 0.4s;
+
+        opacity: 1;
+
+        z-index: 2;
+    }
+
+
+    .switch input:checked + .slider .moon {
+        opacity: 0;
+    }
+
+
+    /* ESTRELLAS */
+
+    .stars {
+        position: absolute;
+
+        inset: 0;
+
+        opacity: 1;
+
+        transition: 0.4s;
+    }
+
+
+    .star {
+        position: absolute;
+
+        width: 3px;
+        height: 3px;
+
+        background: white;
+
+        border-radius: 50%;
+    }
+
+
+    .star-1 {
+        top: 7px;
+        right: 12px;
+    }
+
+
+    .star-2 {
+        top: 17px;
+        right: 23px;
+    }
+
+
+    .star-3 {
+        top: 23px;
+        right: 8px;
+    }
+
+
+    .star-4 {
+        top: 11px;
+        right: 29px;
+    }
+
+
+    .switch input:checked + .slider .stars {
+        opacity: 0;
+    }
+
+
+    /* =========================
+       BOTÓN HAMBURGUESA
+    ========================= */
+
+    .menu-button {
+        display: none;
+
+        width: 42px;
+        height: 42px;
+
+        border: 1px solid #343946;
+
+        border-radius: 10px;
+
+        background: var(--card-background);
+
+        cursor: none !important;
+
+        position: relative;
+    }
+
+
+    .menu-button span {
+        position: absolute;
+
+        width: 20px;
+        height: 2px;
+
+        background: var(--text);
+
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        transition: 0.3s;
+    }
+
+
+    .menu-button span:nth-child(1) {
+        top: 13px;
+    }
+
+
+    .menu-button span:nth-child(2) {
+        top: 20px;
+    }
+
+
+    .menu-button span:nth-child(3) {
+        top: 27px;
+    }
+
+
+    /* ☰ → X */
+
+    .menu-button.active span:nth-child(1) {
+        top: 20px;
+
+        transform:
+            translateX(-50%)
+            rotate(45deg);
+    }
+
+
+    .menu-button.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+
+    .menu-button.active span:nth-child(3) {
+        top: 20px;
+
+        transform:
+            translateX(-50%)
+            rotate(-45deg);
+    }
+
+
+    /* =========================
+       CONTENIDO
+    ========================= */
+
+    main {
+        max-width: 1000px;
+
+        margin: auto;
+
+        padding: 80px 20px;
+
+        text-align: center;
+    }
+
+
+    h1 {
+        font-size: 48px;
+
+        margin-bottom: 15px;
+    }
+
+
+    h1 span {
+        color: #7c5cff;
+    }
+
+
+    .subtitle {
+        color: var(--secondary-text);
+
+        margin-bottom: 60px;
+    }
+
+
+    /* =========================
+       PROCESO
+    ========================= */
+
+    .process {
+        display: grid;
+
+        grid-template-columns:
+            repeat(auto-fit, minmax(180px, 1fr));
+
+        gap: 20px;
+    }
+
+
+    .step {
+        padding: 30px 20px;
+
+        background: var(--card-background);
+
+        border: 1px solid var(--card-border);
+
+        border-radius: 18px;
+
+        transition:
+            0.3s,
+            background 0.35s ease,
+            border-color 0.35s ease;
+    }
+
+
+    .step:hover {
+        transform: translateY(-5px);
+
+        border-color: #6250bd;
+    }
+
+
+    .number {
+        width: 45px;
+        height: 45px;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        margin: auto auto 20px;
+
+        background: #7c5cff;
+
+        border-radius: 50%;
+
+        font-weight: bold;
+
+        color: white;
+    }
+
+
+    .step h2 {
+        color: var(--text);
+    }
+
+
+    .step p {
+        margin-top: 10px;
+
+        color: var(--paragraph);
+
+        line-height: 1.6;
+    }
+
+
+    /* =========================
+       BOTÓN
+    ========================= */
+
+    .back {
+        display: inline-block;
+
+        margin-top: 50px;
+
+        padding: 13px 20px;
+
+        background: var(--button-background);
+
+        color: white;
+
+        border-radius: 9px;
+
+        transition: 0.3s;
+
+        cursor: none !important;
+    }
+
+
+    .back:hover {
+        background: var(--button-hover);
+
+        transform: translateY(-2px);
+    }
+
+
+    /* =========================
+       CELULAR
+    ========================= */
+
+    @media (max-width: 700px) {
 
         nav {
-            position: sticky;
-            top: 0;
+            padding: 14px 5%;
+        }
+
+
+        /* Menú cerrado */
+
+        .menu {
+            position: absolute;
+
+            top: 100%;
+            left: 0;
 
             width: 100%;
 
-            padding: 18px 7%;
-
             display: flex;
-            justify-content: space-between;
-            align-items: center;
 
-            background: rgba(8, 10, 15, 0.95);
+            flex-direction: column;
 
-            border-bottom: 1px solid #252a35;
+            gap: 0;
 
-            z-index: 1000;
+            background: var(--menu-background);
+
+            border-bottom: 1px solid var(--border);
+
+            overflow: hidden;
+
+            max-height: 0;
+
+            opacity: 0;
+
+            transition:
+                max-height 0.35s ease,
+                opacity 0.25s ease;
         }
 
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: 1px;
+        /* Menú abierto */
+
+        .menu.active {
+            max-height: 500px;
+
+            opacity: 1;
         }
 
 
-        .logo span {
-            color: #7c5cff;
-        }
-
-
-        .menu {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-        }
-
+        /* Opciones */
 
         .menu a {
-            color: #a9adb8;
+            width: 100%;
 
-            font-size: 14px;
+            padding: 17px 25px;
 
-            transition: 0.3s;
+            font-size: 15px;
+
+            border-bottom: 1px solid var(--border);
+
+            transition: 0.2s;
         }
 
 
         .menu a:hover {
-            color: white;
+            background: var(--menu-hover);
+
+            color: var(--text);
+
+            padding-left: 32px;
         }
 
 
-        /* =========================
-           BOTÓN HAMBURGUESA
-        ========================= */
+        /* SWITCH EN CELULAR */
+
+        .theme-switch {
+            width: 100%;
+
+            padding: 15px 25px;
+
+            justify-content: flex-start;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+
+        /* Botón ☰ */
 
         .menu-button {
-            display: none;
-
-            width: 42px;
-            height: 42px;
-
-            border: 1px solid #343946;
-
-            border-radius: 10px;
-
-            background: #10131a;
-
-            cursor: pointer;
-
-            position: relative;
+            display: block;
         }
 
 
-        .menu-button span {
-            position: absolute;
-
-            width: 20px;
-            height: 2px;
-
-            background: white;
-
-            left: 50%;
-
-            transform: translateX(-50%);
-
-            transition: 0.3s;
-        }
-
-
-        .menu-button span:nth-child(1) {
-            top: 13px;
-        }
-
-
-        .menu-button span:nth-child(2) {
-            top: 20px;
-        }
-
-
-        .menu-button span:nth-child(3) {
-            top: 27px;
-        }
-
-
-        /* ☰ → X */
-
-        .menu-button.active span:nth-child(1) {
-            top: 20px;
-
-            transform:
-                translateX(-50%)
-                rotate(45deg);
-        }
-
-
-        .menu-button.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-
-        .menu-button.active span:nth-child(3) {
-            top: 20px;
-
-            transform:
-                translateX(-50%)
-                rotate(-45deg);
-        }
-
-
-        /* =========================
-           CONTENIDO
-        ========================= */
+        /* Contenido */
 
         main {
-            max-width: 1000px;
-
-            margin: auto;
-
-            padding: 80px 20px;
-
-            text-align: center;
+            padding: 65px 20px;
         }
 
 
         h1 {
-            font-size: 48px;
-
-            margin-bottom: 15px;
-        }
-
-
-        h1 span {
-            color: #7c5cff;
+            font-size: 40px;
         }
 
 
         .subtitle {
-            color: #999eaa;
+            font-size: 16px;
 
-            margin-bottom: 60px;
+            margin-bottom: 40px;
         }
 
 
-        /* =========================
-           PROCESO
-        ========================= */
-
         .process {
-            display: grid;
-
-            grid-template-columns:
-                repeat(auto-fit, minmax(180px, 1fr));
-
-            gap: 20px;
+            grid-template-columns: 1fr;
         }
 
 
         .step {
-            padding: 30px 20px;
-
-            background: #10131a;
-
-            border: 1px solid #272c37;
-
-            border-radius: 18px;
-
-            transition: 0.3s;
+            padding: 28px 20px;
         }
 
+    }
 
-        .step:hover {
-            transform: translateY(-5px);
-
-            border-color: #6250bd;
-        }
-
-
-        .number {
-            width: 45px;
-            height: 45px;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            margin: auto auto 20px;
-
-            background: #7c5cff;
-
-            border-radius: 50%;
-
-            font-weight: bold;
-        }
-
-
-        .step p {
-            margin-top: 10px;
-
-            color: #9297a4;
-
-            line-height: 1.6;
-        }
-
-
-        /* =========================
-           BOTÓN
-        ========================= */
-
-        .back {
-            display: inline-block;
-
-            margin-top: 50px;
-
-            padding: 13px 20px;
-
-            background: #7c5cff;
-
-            color: white;
-
-            border-radius: 9px;
-
-            transition: 0.3s;
-        }
-
-
-        .back:hover {
-            background: #9278ff;
-
-            transform: translateY(-2px);
-        }
-
-
-        /* =========================
-           CELULAR
-        ========================= */
-
-        @media (max-width: 700px) {
-
-            nav {
-                padding: 14px 5%;
-            }
-
-
-            /* Menú cerrado */
-
-            .menu {
-                position: absolute;
-
-                top: 100%;
-                left: 0;
-
-                width: 100%;
-
-                display: flex;
-
-                flex-direction: column;
-
-                gap: 0;
-
-                background: rgba(8, 10, 15, 0.98);
-
-                border-bottom: 1px solid #252a35;
-
-                overflow: hidden;
-
-                max-height: 0;
-
-                opacity: 0;
-
-                transition:
-                    max-height 0.35s ease,
-                    opacity 0.25s ease;
-            }
-
-
-            /* Menú abierto */
-
-            .menu.active {
-                max-height: 400px;
-
-                opacity: 1;
-            }
-
-
-            /* Opciones */
-
-            .menu a {
-                width: 100%;
-
-                padding: 17px 25px;
-
-                font-size: 15px;
-
-                border-bottom: 1px solid #1d212a;
-
-                transition: 0.2s;
-            }
-
-
-            .menu a:hover {
-                background: #11141c;
-
-                color: white;
-
-                padding-left: 32px;
-            }
-
-
-            /* Botón ☰ */
-
-            .menu-button {
-                display: block;
-            }
-
-
-            /* Contenido */
-
-            main {
-                padding: 65px 20px;
-            }
-
-
-            h1 {
-                font-size: 40px;
-            }
-
-
-            .subtitle {
-                font-size: 16px;
-
-                margin-bottom: 40px;
-            }
-
-
-            .process {
-                grid-template-columns: 1fr;
-            }
-
-
-            .step {
-                padding: 28px 20px;
-            }
-
-        }
-
-    </style>
+</style>
+```
 
 </head>
 
-
 <body>
 
+<!-- =========================
+     CURSOR PERSONALIZADO
+========================= -->
+
+<div
+    class="custom-cursor"
+    id="customCursor"
+    aria-hidden="true"
+>
+
+```
+<div class="cursor-ring"></div>
+
+<div class="cursor-dot"></div>
+```
+
+</div>
 
 <!-- =========================
      MENÚ
@@ -423,63 +851,111 @@
 
 <nav>
 
+```
+<div class="logo">
 
-    <div class="logo">
+    <span>Air</span>Mouse
 
-        <span>Air</span>Mouse
+</div>
+
+
+<div class="menu" id="menu">
+
+
+    <a href="index.html">
+        Inicio
+    </a>
+
+
+    <a href="proyecto.html">
+        Proyecto
+    </a>
+
+
+    <a href="funcionamiento.html">
+        Funcionamiento
+    </a>
+
+
+    <a href="software.html">
+        Software
+    </a>
+
+
+    <a href="compatibilidad.html">
+        Compatibilidad
+    </a>
+
+
+    <!-- SWITCH -->
+
+    <div class="theme-switch">
+
+        <label class="switch">
+
+            <input
+                id="themeInput"
+                type="checkbox"
+            >
+
+            <div class="slider round">
+
+                <!-- NUBES -->
+
+                <div class="cloud cloud-1"></div>
+
+                <div class="cloud cloud-2"></div>
+
+                <div class="cloud cloud-3"></div>
+
+
+                <!-- LUNA -->
+
+                <div class="moon"></div>
+
+
+                <!-- ESTRELLAS -->
+
+                <div class="stars">
+
+                    <div class="star star-1"></div>
+
+                    <div class="star star-2"></div>
+
+                    <div class="star star-3"></div>
+
+                    <div class="star star-4"></div>
+
+                </div>
+
+            </div>
+
+        </label>
 
     </div>
 
 
-    <div class="menu" id="menu">
+</div>
 
 
-        <a href="index.html">
-            Inicio
-        </a>
+<!-- BOTÓN HAMBURGUESA -->
 
+<button
+    class="menu-button"
+    id="menuButton"
+    aria-label="Abrir menú"
+>
 
-        <a href="proyecto.html">
-            Proyecto
-        </a>
+    <span></span>
 
+    <span></span>
 
-        <a href="funcionamiento.html">
-            Funcionamiento
-        </a>
+    <span></span>
 
-
-        <a href="software.html">
-            Software
-        </a>
-
-
-        <a href="compatibilidad.html">
-            Compatibilidad
-        </a>
-
-
-    </div>
-
-
-    <!-- BOTÓN HAMBURGUESA -->
-
-    <button
-        class="menu-button"
-        id="menuButton"
-        aria-label="Abrir menú"
-    >
-
-        <span></span>
-        <span></span>
-        <span></span>
-
-    </button>
-
+</button>
+```
 
 </nav>
-
-
 
 <!-- =========================
      CONTENIDO
@@ -487,127 +963,130 @@
 
 <main>
 
+```
+<h1>
 
-    <h1>
+    ¿Cómo <span>funciona?</span>
 
-        ¿Cómo <span>funciona?</span>
-
-    </h1>
-
-
-    <p class="subtitle">
-
-        El movimiento de tu mano se transforma en acciones digitales.
-
-    </p>
+</h1>
 
 
+<p class="subtitle">
 
-    <div class="process">
+    El movimiento de tu mano se transforma en acciones digitales.
+
+</p>
 
 
-        <div class="step">
 
-            <div class="number">
-                1
-            </div>
+<div class="process">
 
-            <h2>
-                Movimiento
-            </h2>
 
-            <p>
+    <div class="step">
 
-                El usuario realiza un movimiento natural con la mano.
-
-            </p>
-
+        <div class="number">
+            1
         </div>
 
+        <h2>
+            Movimiento
+        </h2>
 
+        <p>
 
-        <div class="step">
+            El usuario realiza un movimiento natural con la mano.
 
-            <div class="number">
-                2
-            </div>
-
-            <h2>
-                MPU6050
-            </h2>
-
-            <p>
-
-                El sensor detecta la orientación y el movimiento.
-
-            </p>
-
-        </div>
-
-
-
-        <div class="step">
-
-            <div class="number">
-                3
-            </div>
-
-            <h2>
-                ESP32
-            </h2>
-
-            <p>
-
-                El microcontrolador procesa los datos recibidos.
-
-            </p>
-
-        </div>
-
-
-
-        <div class="step">
-
-            <div class="number">
-                4
-            </div>
-
-            <h2>
-                Bluetooth
-            </h2>
-
-            <p>
-
-                La información se transmite de forma inalámbrica.
-
-            </p>
-
-        </div>
-
+        </p>
 
     </div>
 
 
 
-    <a
-        class="back"
-        href="index.html"
-    >
+    <div class="step">
 
-        Volver al inicio
+        <div class="number">
+            2
+        </div>
 
-    </a>
+        <h2>
+            MPU6050
+        </h2>
 
+        <p>
+
+            El sensor detecta la orientación y el movimiento.
+
+        </p>
+
+    </div>
+
+
+
+    <div class="step">
+
+        <div class="number">
+            3
+        </div>
+
+        <h2>
+            ESP32
+        </h2>
+
+        <p>
+
+            El microcontrolador procesa los datos recibidos.
+
+        </p>
+
+    </div>
+
+
+
+    <div class="step">
+
+        <div class="number">
+            4
+        </div>
+
+        <h2>
+            Bluetooth
+        </h2>
+
+        <p>
+
+            La información se transmite de forma inalámbrica.
+
+        </p>
+
+    </div>
+
+
+</div>
+
+
+
+<a
+    class="back"
+    href="index.html"
+>
+
+    Volver al inicio
+
+</a>
+```
 
 </main>
 
-
-
 <!-- =========================
-     JAVASCRIPT DEL MENÚ
+     JAVASCRIPT
 ========================= -->
 
 <script>
+
+
+    /* =========================
+       MENÚ HAMBURGUESA
+    ========================= */
 
     const menuButton =
         document.getElementById("menuButton");
@@ -643,8 +1122,254 @@
 
     });
 
-</script>
 
+
+    /* =========================
+       TEMA OSCURO / CLARO
+    ========================= */
+
+    const themeInput =
+        document.getElementById("themeInput");
+
+
+    const savedTheme =
+        localStorage.getItem("airmouse-theme");
+
+
+    if (savedTheme === "light") {
+
+        document.body.classList.add("light-theme");
+
+        themeInput.checked = true;
+
+    } else {
+
+        document.body.classList.remove("light-theme");
+
+        themeInput.checked = false;
+
+    }
+
+
+    themeInput.addEventListener("change", function () {
+
+        if (themeInput.checked) {
+
+            document.body.classList.add("light-theme");
+
+            localStorage.setItem(
+                "airmouse-theme",
+                "light"
+            );
+
+        } else {
+
+            document.body.classList.remove("light-theme");
+
+            localStorage.setItem(
+                "airmouse-theme",
+                "dark"
+            );
+
+        }
+
+    });
+
+
+
+    /* =========================
+       CURSOR PERSONALIZADO
+    ========================= */
+
+    const customCursor =
+        document.getElementById("customCursor");
+
+
+    let mouseX = 0;
+
+    let mouseY = 0;
+
+    let cursorX = 0;
+
+    let cursorY = 0;
+
+
+    document.addEventListener(
+        "mousemove",
+        function (event) {
+
+            mouseX = event.clientX;
+
+            mouseY = event.clientY;
+
+            customCursor.style.opacity = "1";
+
+        }
+    );
+
+
+    document.addEventListener(
+        "mouseleave",
+        function () {
+
+            customCursor.style.opacity = "0";
+
+        }
+    );
+
+
+    function animateCursor() {
+
+        cursorX +=
+            (mouseX - cursorX) * 0.18;
+
+        cursorY +=
+            (mouseY - cursorY) * 0.18;
+
+
+        customCursor.style.transform =
+            `translate3d(${cursorX}px, ${cursorY}px, 0)`;
+
+
+        requestAnimationFrame(
+            animateCursor
+        );
+
+    }
+
+
+    animateCursor();
+
+
+
+    /* =========================
+       EFECTOS DEL CURSOR
+    ========================= */
+
+    const interactiveElements =
+        document.querySelectorAll(
+            "a, button, .step, .back, .switch, .slider"
+        );
+
+
+    interactiveElements.forEach(
+        function (element) {
+
+            element.addEventListener(
+                "mouseenter",
+                function () {
+
+                    customCursor.classList.add(
+                        "hovering"
+                    );
+
+                }
+            );
+
+
+            element.addEventListener(
+                "mouseleave",
+                function () {
+
+                    customCursor.classList.remove(
+                        "hovering"
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    const cards =
+        document.querySelectorAll(".step");
+
+
+    cards.forEach(
+        function (card) {
+
+            card.addEventListener(
+                "mouseenter",
+                function () {
+
+                    customCursor.classList.add(
+                        "hovering"
+                    );
+
+                    customCursor.classList.add(
+                        "card-hover"
+                    );
+
+                }
+            );
+
+
+            card.addEventListener(
+                "mouseleave",
+                function () {
+
+                    customCursor.classList.remove(
+                        "hovering"
+                    );
+
+                    customCursor.classList.remove(
+                        "card-hover"
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+
+    /* =========================
+       CLICK
+    ========================= */
+
+    document.addEventListener(
+        "mousedown",
+        function () {
+
+            customCursor.classList.add(
+                "clicking"
+            );
+
+        }
+    );
+
+
+    document.addEventListener(
+        "mouseup",
+        function () {
+
+            customCursor.classList.remove(
+                "clicking"
+            );
+
+        }
+    );
+
+
+    document.addEventListener(
+        "mouseout",
+        function (event) {
+
+            if (!event.relatedTarget) {
+
+                customCursor.classList.remove(
+                    "clicking"
+                );
+
+            }
+
+        }
+    );
+
+
+</script>
 
 </body>
 
