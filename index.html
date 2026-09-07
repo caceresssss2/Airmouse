@@ -1,4 +1,3 @@
-cat > /home/claude/index.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -32,9 +31,598 @@ cat > /home/claude/index.html << 'HTMLEOF'
             color: inherit;
         }
 
-        a:focus-visible,
-        button:focus-visible {
-            outline: 2px solid #a899ff;
+        /* NAVBAR */
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(8, 10, 15, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #20242d;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #7c5cff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: #b9bdc8;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 20px 80px;
+            background:
+                radial-gradient(circle at 50% 30%, #24185a 0%, #080a0f 45%);
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 7px 15px;
+            border: 1px solid #39304f;
+            border-radius: 50px;
+            color: #b8aaff;
+            background: rgba(124, 92, 255, 0.08);
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: clamp(55px, 12vw, 110px);
+            line-height: 0.95;
+            margin-bottom: 25px;
+            letter-spacing: -5px;
+        }
+
+        .gradient {
+            background: linear-gradient(90deg, #ffffff, #a899ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+            color: #a7abb7;
+            font-size: 18px;
+        }
+
+        .buttons {
+            margin-top: 35px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            padding: 14px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .primary {
+            background: #7c5cff;
+            color: white;
+        }
+
+        .primary:hover {
+            transform: translateY(-3px);
+            background: #9075ff;
+        }
+
+        .secondary {
+            border: 1px solid #343946;
+            color: #d6d8df;
+        }
+
+        .secondary:hover {
+            background: #171a22;
+        }
+
+        /* SECTIONS */
+
+        section {
+            padding: 100px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 50px;
+            color: #969ba8;
+        }
+
+        /* ABOUT */
+
+        .about {
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .about p {
+            color: #b5b9c4;
+            font-size: 17px;
+        }
+
+        /* CARDS */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .card {
+            padding: 30px;
+            background: #10131a;
+            border: 1px solid #242833;
+            border-radius: 18px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #6650c9;
+        }
+
+        .icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #9297a4;
+            font-size: 14px;
+        }
+
+        /* HOW IT WORKS */
+
+        .process {
+            max-width: 1000px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            text-align: center;
+        }
+
+        .step {
+            padding: 25px 15px;
+            background: #0f1218;
+            border-radius: 15px;
+            border: 1px solid #232732;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #7c5cff;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+
+        .step p {
+            color: #969ba8;
+            font-size: 14px;
+        }
+
+        /* SOFTWARE */
+
+        .software {
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+            padding: 50px 30px;
+            background: linear-gradient(145deg, #141122, #0e1016);
+            border: 1px solid #332b52;
+            border-radius: 25px;
+        }
+
+        .software h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .software p {
+            color: #a0a4b0;
+            margin-bottom: 25px;
+        }
+
+        .download {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #7c5cff;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .download:hover {
+            transform: scale(1.04);
+        }
+
+        .version {
+            display: block;
+            margin-top: 15px;
+            color: #737887;
+            font-size: 12px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid #20242d;
+            color: #777c89;
+            font-size: 13px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 650px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            nav {
+                padding: 18px 5%;
+            }
+
+            section {
+                padding: 80px 5%;
+            }
+
+            h1 {
+                letter-spacing: -3px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+        <div class="logo">
+            <span>Air</span>Mouse
+        </div>
+
+        <div class="nav-links">
+            <a href="#proyecto">Proyecto</a>
+            <a href="#funcionamiento">Funcionamiento</a>
+            <a href="#software">Software</a>
+            <a href="#compatibilidad">Compatibilidad</a>
+        </div>
+    </nav>
+
+
+    <!-- HERO -->
+
+    <header class="hero">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                Ratón aéreo inalámbrico
+            </div>
+
+            <h1>
+                <span class="gradient">AirMouse</span>
+            </h1>
+
+            <p>
+                Una nueva forma de interactuar con tus dispositivos.
+                Controlá el cursor mediante movimientos naturales utilizando
+                tecnología inercial y comunicación inalámbrica.
+            </p>
+
+            <div class="buttons">
+
+                <a href="#software" class="button primary">
+                    Descargar software
+                </a>
+
+                <a href="#proyecto" class="button secondary">
+                    Conocer el proyecto
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- PROYECTO -->
+
+    <section id="proyecto">
+
+        <div class="about">
+
+            <h2 class="section-title">
+                ¿Qué es AirMouse?
+            </h2>
+
+            <p class="section-subtitle">
+                Tecnología pensada para crear una forma alternativa,
+                intuitiva y personalizable de controlar dispositivos.
+            </p>
+
+            <p>
+                AirMouse es un ratón aéreo inalámbrico basado en sistemas
+                embebidos e interfaces inerciales. Utiliza un sensor
+                MPU6050 para detectar los movimientos de la mano y un
+                microcontrolador ESP32 para procesar y transmitir las
+                acciones mediante Bluetooth.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- CARACTERISTICAS -->
+
+    <section>
+
+        <h2 class="section-title">
+            Diseñado para adaptarse
+        </h2>
+
+        <p class="section-subtitle">
+            AirMouse busca reducir la exigencia física y ofrecer
+            configuraciones adaptables a diferentes usuarios.
+        </p>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="icon">🎯</div>
+                <h3>Precisión</h3>
+                <p>
+                    Detecta los movimientos mediante una unidad
+                    de medición inercial.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🔵</div>
+                <h3>Inalámbrico</h3>
+                <p>
+                    Comunicación Bluetooth para interactuar
+                    sin cables.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">⚙️</div>
+                <h3>Personalizable</h3>
+                <p>
+                    Configuraciones adaptables para diferentes
+                    necesidades y preferencias.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">♿</div>
+                <h3>Accesibilidad</h3>
+                <p>
+                    Pensado como una alternativa de interacción
+                    con baja exigencia motriz.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FUNCIONAMIENTO -->
+
+    <section id="funcionamiento">
+
+        <h2 class="section-title">
+            ¿Cómo funciona?
+        </h2>
+
+        <p class="section-subtitle">
+            Del movimiento de tu mano al control de tu dispositivo.
+        </p>
+
+        <div class="process">
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Movimiento</h3>
+                <p>
+                    El usuario mueve la mano.
+                </p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>MPU6050</h3>
+                <p>
+                    El sensor detecta la orientación y movimiento.
+                </p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>ESP32</h3>
+                <p>
+                    Procesa la información recibida.
+                </p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Bluetooth</h3>
+                <p>
+                    Envía las acciones al dispositivo.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- COMPATIBILIDAD -->
+
+    <section id="compatibilidad">
+
+        <h2 class="section-title">
+            Compatibilidad
+        </h2>
+
+        <p class="section-subtitle">
+            El objetivo de AirMouse es ofrecer una experiencia
+            multiplataforma.
+        </p>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="icon">💻</div>
+                <h3>PC</h3>
+                <p>
+                    Compatible con computadoras mediante Bluetooth HID.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">📱</div>
+                <h3>Android</h3>
+                <p>
+                    Diseñado para permitir interacción con dispositivos Android.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">📺</div>
+                <h3>Android TV</h3>
+                <p>
+                    Posibilidad de utilizar AirMouse con televisores
+                    y dispositivos Google TV compatibles.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SOFTWARE -->
+
+    <section id="software">
+
+        <div class="software">
+
+            <h2>
+                AirMouse Software
+            </h2>
+
+            <p>
+                Configurá y personalizá tu AirMouse desde nuestro
+                software dedicado.
+            </p>
+
+            <!-- CAMBIAR ESTE ENLACE CUANDO SUBAMOS EL SOFTWARE -->
+
+            <a href="#" class="download">
+                ⬇ Descargar software
+            </a>
+
+            <span class="version">
+                Próximamente · Windows
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 AirMouse Project
+        </p>
+
+        <p>
+            Ratón Aéreo Inalámbrico Basado en Sistemas Embebidos
+            e Interfaces Inerciales
+        </p>
+
+    </footer>
+
+</body>
+</html>            outline: 2px solid #a899ff;
             outline-offset: 3px;
             border-radius: 4px;
         }
