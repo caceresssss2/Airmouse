@@ -13,9 +13,9 @@
 
     <style>
 
-        /* =========================
+        /* =====================================================
            CONFIGURACIÓN GENERAL
-        ========================= */
+        ===================================================== */
 
         * {
             box-sizing: border-box;
@@ -40,9 +40,188 @@
         }
 
 
-        /* =========================
+        /* =====================================================
+           CURSOR PERSONALIZADO - CONFIGURACIÓN
+        ===================================================== */
+
+        :root {
+
+            /* Color principal del cursor */
+            --cursor-color: #7c5cff;
+
+            /* Color del brillo */
+            --cursor-glow: rgba(124, 92, 255, 0.45);
+
+            /* Tamaño del punto central */
+            --cursor-dot-size: 7px;
+
+            /* Tamaño del aro */
+            --cursor-ring-size: 34px;
+
+            /* Grosor del aro */
+            --cursor-ring-border: 1.5px;
+
+            /* Velocidad de animación */
+            --cursor-transition: 0.18s;
+
+        }
+
+
+        /* Cursor */
+
+        .custom-cursor {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            pointer-events: none;
+
+            z-index: 99999;
+
+            opacity: 0;
+
+            transition: opacity 0.2s ease;
+        }
+
+
+        /* Punto central */
+
+        .cursor-dot {
+            position: absolute;
+
+            width: var(--cursor-dot-size);
+            height: var(--cursor-dot-size);
+
+            border-radius: 50%;
+
+            background: var(--cursor-color);
+
+            box-shadow:
+                0 0 8px var(--cursor-color),
+                0 0 18px var(--cursor-glow);
+
+            transform: translate(-50%, -50%);
+
+            transition:
+                width var(--cursor-transition) ease,
+                height var(--cursor-transition) ease,
+                background var(--cursor-transition) ease;
+        }
+
+
+        /* Aro exterior */
+
+        .cursor-ring {
+            position: absolute;
+
+            width: var(--cursor-ring-size);
+            height: var(--cursor-ring-size);
+
+            border-radius: 50%;
+
+            border:
+                var(--cursor-ring-border)
+                solid
+                rgba(124, 92, 255, 0.65);
+
+            transform: translate(-50%, -50%);
+
+            box-shadow:
+                0 0 12px rgba(124, 92, 255, 0.15);
+
+            transition:
+                width 0.25s ease,
+                height 0.25s ease,
+                border-color 0.25s ease,
+                background 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        /* =====================================================
+           CURSOR SOBRE ELEMENTOS INTERACTIVOS
+        ===================================================== */
+
+        .custom-cursor.hovering .cursor-ring {
+            width: 52px;
+            height: 52px;
+
+            border-color: rgba(124, 92, 255, 0.9);
+
+            background: rgba(124, 92, 255, 0.08);
+
+            box-shadow:
+                0 0 20px rgba(124, 92, 255, 0.25),
+                inset 0 0 15px rgba(124, 92, 255, 0.08);
+        }
+
+        .custom-cursor.hovering .cursor-dot {
+            width: 11px;
+            height: 11px;
+
+            box-shadow:
+                0 0 10px #7c5cff,
+                0 0 25px rgba(124, 92, 255, 0.7);
+        }
+
+
+        /* =====================================================
+           CURSOR SOBRE LAS TARJETAS
+        ===================================================== */
+
+        .custom-cursor.card-hover .cursor-ring {
+            width: 65px;
+            height: 65px;
+
+            border-color: rgba(168, 154, 255, 0.9);
+
+            background: rgba(124, 92, 255, 0.05);
+
+            box-shadow:
+                0 0 30px rgba(124, 92, 255, 0.25);
+        }
+
+        .custom-cursor.card-hover .cursor-dot {
+            width: 12px;
+            height: 12px;
+
+            background: #a89aff;
+
+            box-shadow:
+                0 0 12px #7c5cff,
+                0 0 30px rgba(124, 92, 255, 0.8);
+        }
+
+
+        /* =====================================================
+           ANIMACIÓN AL HACER CLICK
+        ===================================================== */
+
+        .custom-cursor.clicking .cursor-ring {
+            width: 25px;
+            height: 25px;
+
+            border-color: #ffffff;
+
+            background: rgba(124, 92, 255, 0.2);
+        }
+
+        .custom-cursor.clicking .cursor-dot {
+            width: 13px;
+            height: 13px;
+
+            background: white;
+
+            box-shadow:
+                0 0 15px white,
+                0 0 30px #7c5cff;
+        }
+
+
+        /* =====================================================
            MENÚ
-        ========================= */
+        ===================================================== */
 
         nav {
             position: sticky;
@@ -89,9 +268,9 @@
         }
 
 
-        /* =========================
+        /* =====================================================
            BOTÓN HAMBURGUESA
-        ========================= */
+        ===================================================== */
 
         .menu-button {
             display: none;
@@ -141,7 +320,10 @@
 
         .menu-button.active span:nth-child(1) {
             top: 20px;
-            transform: translateX(-50%) rotate(45deg);
+
+            transform:
+                translateX(-50%)
+                rotate(45deg);
         }
 
         .menu-button.active span:nth-child(2) {
@@ -150,13 +332,16 @@
 
         .menu-button.active span:nth-child(3) {
             top: 20px;
-            transform: translateX(-50%) rotate(-45deg);
+
+            transform:
+                translateX(-50%)
+                rotate(-45deg);
         }
 
 
-        /* =========================
+        /* =====================================================
            HERO
-        ========================= */
+        ===================================================== */
 
         .hero {
             min-height: 88vh;
@@ -231,9 +416,9 @@
         }
 
 
-        /* =========================
+        /* =====================================================
            BOTONES
-        ========================= */
+        ===================================================== */
 
         .buttons {
             margin-top: 35px;
@@ -278,9 +463,9 @@
         }
 
 
-        /* =========================
+        /* =====================================================
            SECCIÓN PRESENTACIÓN
-        ========================= */
+        ===================================================== */
 
         .intro {
             padding: 100px 7%;
@@ -311,9 +496,9 @@
         }
 
 
-        /* =========================
+        /* =====================================================
            TARJETAS
-        ========================= */
+        ===================================================== */
 
         .features {
             padding: 60px 7% 100px;
@@ -341,9 +526,9 @@
         }
 
 
-        /* =========================
-           TARJETA ESTILO UIVERSE
-        ========================= */
+        /* =====================================================
+           TARJETA ESTILO UIVERSE + AIRMOUSE
+        ===================================================== */
 
         .card {
             min-height: 254px;
@@ -373,12 +558,13 @@
         }
 
 
-        /* Efecto al pasar el mouse */
+        /* Efecto hover */
 
         .card:hover {
             transform: translateY(-8px);
 
-            border-color: rgba(124, 92, 255, 0.7);
+            border-color:
+                rgba(124, 92, 255, 0.7);
 
             box-shadow:
                 20px 20px 40px rgba(0, 0, 0, 0.75),
@@ -386,9 +572,44 @@
                 0 0 25px rgba(124, 92, 255, 0.12);
         }
 
-        /* =========================
-           TEXTO DE LAS TARJETAS
-        ========================= */
+
+        /* =====================================================
+           ICONOS
+        ===================================================== */
+
+        .icon {
+            width: 58px;
+
+            height: 58px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 29px;
+
+            margin-bottom: 20px;
+
+            border-radius: 16px;
+
+            background:
+                rgba(124, 92, 255, 0.10);
+
+            border:
+                1px solid
+                rgba(124, 92, 255, 0.20);
+
+            box-shadow:
+                inset 3px 3px 8px rgba(0, 0, 0, 0.35),
+                inset -3px -3px 8px rgba(124, 92, 255, 0.04);
+        }
+
+
+        /* =====================================================
+           TEXTO TARJETAS
+        ===================================================== */
 
         .card h3 {
             margin-bottom: 10px;
@@ -407,9 +628,9 @@
         }
 
 
-        /* =========================
+        /* =====================================================
            FOOTER
-        ========================= */
+        ===================================================== */
 
         footer {
             padding: 40px 20px;
@@ -424,14 +645,21 @@
         }
 
 
-        /* =========================
+        /* =====================================================
            CELULAR
-        ========================= */
+        ===================================================== */
 
         @media (max-width: 700px) {
 
             nav {
                 padding: 14px 5%;
+            }
+
+
+            /* Ocultar cursor personalizado */
+
+            .custom-cursor {
+                display: none;
             }
 
 
@@ -452,9 +680,11 @@
 
                 gap: 0;
 
-                background: rgba(8, 10, 15, 0.98);
+                background:
+                    rgba(8, 10, 15, 0.98);
 
-                border-bottom: 1px solid #252a35;
+                border-bottom:
+                    1px solid #252a35;
 
                 overflow: hidden;
 
@@ -486,7 +716,8 @@
 
                 font-size: 15px;
 
-                border-bottom: 1px solid #1d212a;
+                border-bottom:
+                    1px solid #1d212a;
 
                 transition: 0.2s;
             }
@@ -510,7 +741,8 @@
             /* Título */
 
             h1 {
-                font-size: clamp(55px, 18vw, 90px);
+                font-size:
+                    clamp(55px, 18vw, 90px);
 
                 letter-spacing: -4px;
             }
@@ -582,9 +814,23 @@
 <body>
 
 
-    <!-- =========================
+    <!-- =====================================================
+         CURSOR PERSONALIZADO
+    ===================================================== -->
+
+    <div class="custom-cursor" id="customCursor">
+
+        <div class="cursor-ring"></div>
+
+        <div class="cursor-dot"></div>
+
+    </div>
+
+
+
+    <!-- =====================================================
          MENÚ
-    ========================= -->
+    ===================================================== -->
 
     <nav>
 
@@ -640,9 +886,9 @@
 
 
 
-    <!-- =========================
+    <!-- =====================================================
          INICIO
-    ========================= -->
+    ===================================================== -->
 
     <header class="hero">
 
@@ -703,9 +949,9 @@
 
 
 
-    <!-- =========================
+    <!-- =====================================================
          PRESENTACIÓN
-    ========================= -->
+    ===================================================== -->
 
     <section class="intro">
 
@@ -732,9 +978,9 @@
 
 
 
-    <!-- =========================
+    <!-- =====================================================
          CARACTERÍSTICAS
-    ========================= -->
+    ===================================================== -->
 
     <section class="features">
 
@@ -753,7 +999,7 @@
             <div class="card">
 
                 <div class="icon">
-                    
+                    🎯
                 </div>
 
                 <h3>
@@ -775,7 +1021,7 @@
             <div class="card">
 
                 <div class="icon">
-                    
+                    🔵
                 </div>
 
                 <h3>
@@ -797,7 +1043,7 @@
             <div class="card">
 
                 <div class="icon">
-                    
+                    ⚙️
                 </div>
 
                 <h3>
@@ -819,7 +1065,7 @@
             <div class="card">
 
                 <div class="icon">
-                    
+                    ♿
                 </div>
 
                 <h3>
@@ -842,9 +1088,9 @@
 
 
 
-    <!-- =========================
+    <!-- =====================================================
          FOOTER
-    ========================= -->
+    ===================================================== -->
 
     <footer>
 
@@ -863,11 +1109,15 @@
 
 
 
-    <!-- =========================
-         JAVASCRIPT MENÚ
-    ========================= -->
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
 
     <script>
+
+        /* =====================================================
+           MENÚ HAMBURGUESA
+        ===================================================== */
 
         const menuButton =
             document.getElementById("menuButton");
@@ -885,7 +1135,7 @@
         });
 
 
-        /* Cerrar el menú al seleccionar una opción */
+        /* Cerrar menú al seleccionar una opción */
 
         const menuLinks =
             document.querySelectorAll(".menu a");
@@ -900,6 +1150,166 @@
                 menuButton.classList.remove("active");
 
             });
+
+        });
+
+
+
+        /* =====================================================
+           CURSOR PERSONALIZADO
+        ===================================================== */
+
+        const customCursor =
+            document.getElementById("customCursor");
+
+
+        let mouseX = 0;
+        let mouseY = 0;
+
+        let cursorX = 0;
+        let cursorY = 0;
+
+
+        /* Detectar movimiento del mouse */
+
+        document.addEventListener("mousemove", function (event) {
+
+            mouseX = event.clientX;
+
+            mouseY = event.clientY;
+
+            customCursor.style.opacity = "1";
+
+        });
+
+
+        /* Ocultar cursor cuando sale de la página */
+
+        document.addEventListener("mouseleave", function () {
+
+            customCursor.style.opacity = "0";
+
+        });
+
+
+        document.addEventListener("mouseenter", function () {
+
+            customCursor.style.opacity = "1";
+
+        });
+
+
+        /* =====================================================
+           MOVIMIENTO SUAVE
+        ===================================================== */
+
+        function animateCursor() {
+
+            /*
+                Este valor controla qué tan rápido
+                sigue el aro al cursor.
+
+                Más alto = más rápido
+                Más bajo = más suave
+            */
+
+            const speed = 0.18;
+
+
+            cursorX +=
+                (mouseX - cursorX) * speed;
+
+            cursorY +=
+                (mouseY - cursorY) * speed;
+
+
+            customCursor.style.transform =
+                `translate(${cursorX}px, ${cursorY}px)`;
+
+
+            requestAnimationFrame(animateCursor);
+
+        }
+
+
+        animateCursor();
+
+
+
+        /* =====================================================
+           ELEMENTOS INTERACTIVOS
+        ===================================================== */
+
+        const interactiveElements =
+            document.querySelectorAll(
+                "a, button, .badge"
+            );
+
+
+        interactiveElements.forEach(function (element) {
+
+            element.addEventListener("mouseenter", function () {
+
+                customCursor.classList.add("hovering");
+
+            });
+
+
+            element.addEventListener("mouseleave", function () {
+
+                customCursor.classList.remove("hovering");
+
+            });
+
+        });
+
+
+
+        /* =====================================================
+           TARJETAS
+        ===================================================== */
+
+        const cards =
+            document.querySelectorAll(".card");
+
+
+        cards.forEach(function (card) {
+
+            card.addEventListener("mouseenter", function () {
+
+                customCursor.classList.add("hovering");
+
+                customCursor.classList.add("card-hover");
+
+            });
+
+
+            card.addEventListener("mouseleave", function () {
+
+                customCursor.classList.remove("hovering");
+
+                customCursor.classList.remove("card-hover");
+
+            });
+
+        });
+
+
+
+        /* =====================================================
+           CLICK
+        ===================================================== */
+
+        document.addEventListener("mousedown", function () {
+
+            customCursor.classList.add("clicking");
+
+        });
+
+
+        document.addEventListener("mouseup", function () {
+
+            customCursor.classList.remove("clicking");
 
         });
 
