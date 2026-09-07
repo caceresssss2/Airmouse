@@ -14,42 +14,27 @@
     <style>
 
         /* =====================================================
-           VARIABLES DE COLOR
+           VARIABLES
         ===================================================== */
 
         :root {
 
-            /* MODO OSCURO */
-
             --background: #080a0f;
-
             --surface: #10131a;
-
-            --surface-card: #151820;
-
-            --surface-hover: #1b1e28;
+            --card: #181a20;
 
             --border: #252a35;
 
-            --border-hover: #6250bd;
-
             --text: #ffffff;
-
             --text-secondary: #a6abb7;
-
             --text-muted: #9297a4;
 
             --primary: #7c5cff;
-
             --primary-light: #a89aff;
 
             --nav-background: rgba(8, 10, 15, 0.88);
 
             --hero-glow: rgba(124, 92, 255, 0.20);
-
-            --card-shadow:
-                15px 15px 30px rgba(0, 0, 0, 0.55),
-                -10px -10px 25px rgba(70, 70, 90, 0.10);
 
         }
 
@@ -60,52 +45,49 @@
 
         body.light-mode {
 
-            --background: #eef0f5;
+            --background: #eef7ff;
+            --surface: #ffffff;
+            --card: #ffffff;
 
-            --surface: #f7f8fb;
+            --border: #dce5ef;
 
-            --surface-card: #ffffff;
-
-            --surface-hover: #f2f0ff;
-
-            --border: #dfe1e8;
-
-            --border-hover: #7659e8;
-
-            --text: #17181d;
-
-            --text-secondary: #555b6b;
-
-            --text-muted: #686e7d;
+            --text: #17191f;
+            --text-secondary: #596273;
+            --text-muted: #697385;
 
             --primary: #6846e8;
-
             --primary-light: #795cff;
 
-            --nav-background: rgba(247, 248, 251, 0.88);
+            --nav-background: rgba(255, 255, 255, 0.88);
 
-            --hero-glow: rgba(124, 92, 255, 0.14);
-
-            --card-shadow:
-                12px 12px 25px rgba(80, 84, 100, 0.14),
-                -10px -10px 25px rgba(255, 255, 255, 0.90);
+            --hero-glow: rgba(75, 174, 255, 0.22);
 
         }
 
 
         /* =====================================================
-           CONFIGURACIÓN GENERAL
+           GENERAL
         ===================================================== */
 
         * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+
+            box-sizing:
+                border-box;
+
+            margin:
+                0;
+
+            padding:
+                0;
+
         }
 
 
         html {
-            scroll-behavior: smooth;
+
+            scroll-behavior:
+                smooth;
+
         }
 
 
@@ -125,14 +107,12 @@
             line-height:
                 1.6;
 
-            /* Ocultar cursor original */
-
             cursor:
                 none;
 
             transition:
 
-                background 0.5s ease,
+                background 0.6s ease,
 
                 color 0.5s ease;
 
@@ -140,11 +120,13 @@
 
 
         a {
+
             text-decoration:
                 none;
 
             color:
                 inherit;
+
         }
 
 
@@ -173,9 +155,6 @@
             opacity:
                 0;
 
-            transition:
-                opacity 0.2s ease;
-
         }
 
 
@@ -202,18 +181,13 @@
                 var(--primary),
 
                 0 0 18px
-                rgba(124, 92, 255, 0.45);
+                rgba(124, 92, 255, 0.5);
 
             transform:
                 translate(-50%, -50%);
 
             transition:
-
-                width 0.18s ease,
-
-                height 0.18s ease,
-
-                background 0.18s ease;
+                0.2s;
 
         }
 
@@ -233,7 +207,6 @@
                 50%;
 
             border:
-
                 1.5px solid
                 rgba(124, 92, 255, 0.65);
 
@@ -241,21 +214,10 @@
                 translate(-50%, -50%);
 
             transition:
-
-                width 0.25s ease,
-
-                height 0.25s ease,
-
-                border-color 0.25s ease,
-
-                background 0.25s ease,
-
-                box-shadow 0.25s ease;
+                0.25s;
 
         }
 
-
-        /* Cursor sobre elementos */
 
         .custom-cursor.hovering
         .cursor-ring {
@@ -267,13 +229,12 @@
                 52px;
 
             border-color:
-                rgba(124, 92, 255, 0.9);
+                rgba(124, 92, 255, 0.95);
 
             background:
                 rgba(124, 92, 255, 0.08);
 
             box-shadow:
-
                 0 0 20px
                 rgba(124, 92, 255, 0.25);
 
@@ -289,18 +250,8 @@
             height:
                 11px;
 
-            box-shadow:
-
-                0 0 10px
-                #7c5cff,
-
-                0 0 25px
-                rgba(124, 92, 255, 0.7);
-
         }
 
-
-        /* Cursor sobre tarjetas */
 
         .custom-cursor.card-hover
         .cursor-ring {
@@ -312,50 +263,26 @@
                 65px;
 
             border-color:
-                rgba(168, 154, 255, 0.9);
-
-            background:
-                rgba(124, 92, 255, 0.05);
+                #a89aff;
 
             box-shadow:
-
                 0 0 30px
-                rgba(124, 92, 255, 0.25);
+                rgba(124, 92, 255, 0.3);
 
         }
 
-
-        .custom-cursor.card-hover
-        .cursor-dot {
-
-            width:
-                12px;
-
-            height:
-                12px;
-
-            background:
-                var(--primary-light);
-
-        }
-
-
-        /* Cursor al hacer click */
 
         .custom-cursor.clicking
         .cursor-ring {
 
             width:
-                25px;
+                24px;
 
             height:
-                25px;
+                24px;
 
             border-color:
                 white;
-
-            background:
-                rgba(124, 92, 255, 0.2);
 
         }
 
@@ -371,20 +298,13 @@
 
             background:
                 white;
-
-            box-shadow:
-
-                0 0 15px white,
-
-                0 0 30px
-                var(--primary);
 
         }
 
 
 
         /* =====================================================
-           MENÚ
+           NAV
         ===================================================== */
 
         nav {
@@ -414,19 +334,17 @@
                 var(--nav-background);
 
             backdrop-filter:
-                blur(12px);
+                blur(15px);
 
             border-bottom:
-                1px solid var(--border);
+                1px solid
+                var(--border);
 
             z-index:
                 1000;
 
             transition:
-
-                background 0.5s ease,
-
-                border-color 0.5s ease;
+                0.5s;
 
         }
 
@@ -491,15 +409,18 @@
 
 
         /* =====================================================
-           SWITCH DE TEMA
+           SWITCH UIVERSE
         ===================================================== */
 
-        .theme-switch-container {
+        .theme-switch {
 
             display:
                 flex;
 
             align-items:
+                center;
+
+            justify-content:
                 center;
 
             margin-left:
@@ -547,20 +468,27 @@
             position:
                 absolute;
 
+            cursor:
+                none;
+
             inset:
                 0;
 
             background-color:
-                #1f2430;
+                #03a9f4;
 
             border-radius:
                 30px;
 
+            overflow:
+                hidden;
+
             transition:
                 0.4s;
 
-            overflow:
-                hidden;
+            box-shadow:
+                inset 0 0 5px
+                rgba(0,0,0,0.2);
 
         }
 
@@ -589,7 +517,7 @@
                 50%;
 
             background-color:
-                white;
+                #ffeb3b;
 
             transition:
                 0.4s;
@@ -597,13 +525,184 @@
             z-index:
                 5;
 
+            box-shadow:
+                0 0 8px
+                rgba(255, 235, 59, 0.7);
+
         }
 
 
+        /* =====================================================
+           NUBES
+        ===================================================== */
+
+        .cloud {
+
+            position:
+                absolute;
+
+            background:
+                #ffffff;
+
+            border-radius:
+                50%;
+
+            transition:
+                0.5s;
+
+        }
+
+
+        .cloud-1 {
+
+            width:
+                1.1em;
+
+            height:
+                0.7em;
+
+            left:
+                0.7em;
+
+            bottom:
+                0.35em;
+
+        }
+
+
+        .cloud-2 {
+
+            width:
+                0.8em;
+
+            height:
+                0.6em;
+
+            left:
+                1.15em;
+
+            bottom:
+                0.65em;
+
+        }
+
+
+        .cloud-3 {
+
+            width:
+                0.7em;
+
+            height:
+                0.5em;
+
+            left:
+                0.35em;
+
+            bottom:
+                0.7em;
+
+        }
+
+
+        /* =====================================================
+           ESTRELLAS
+        ===================================================== */
+
+        .stars {
+
+            position:
+                absolute;
+
+            inset:
+                0;
+
+            pointer-events:
+                none;
+
+            opacity:
+                0;
+
+            transition:
+                0.5s;
+
+        }
+
+
+        .star {
+
+            position:
+                absolute;
+
+            width:
+                4px;
+
+            height:
+                4px;
+
+            background:
+                white;
+
+            border-radius:
+                50%;
+
+            box-shadow:
+                0 0 4px white;
+
+        }
+
+
+        .star-1 {
+
+            top:
+                20%;
+
+            left:
+                18%;
+
+        }
+
+
+        .star-2 {
+
+            top:
+                65%;
+
+            left:
+                35%;
+
+        }
+
+
+        .star-3 {
+
+            top:
+                25%;
+
+            left:
+                68%;
+
+        }
+
+
+        .star-4 {
+
+            top:
+                70%;
+
+            left:
+                82%;
+
+        }
+
+
+        /* =====================================================
+           MODO OSCURO DEL SWITCH
+        ===================================================== */
+
         input:checked + .slider {
 
-            background-color:
-                #171b29;
+            background:
+                #17203a;
 
         }
 
@@ -613,116 +712,63 @@
             transform:
                 translateX(2em);
 
-        }
+            background:
+                #d8dcff;
 
-
-        /* Sol / luna */
-
-        .sun-moon {
-
-            position:
-                absolute;
-
-            width:
-                1.4em;
-
-            height:
-                1.4em;
-
-            left:
-                0.3em;
-
-            top:
-                0.3em;
-
-            transition:
-                transform 0.5s ease;
-
-        }
-
-
-        .sun-moon:before {
-
-            content:
-                "☀";
-
-            position:
-                absolute;
-
-            font-size:
-                1.1em;
-
-            color:
-                #ffd84d;
-
-            top:
-                0;
-
-            left:
-                0;
-
-            transition:
-                0.3s;
+            box-shadow:
+                0 0 8px
+                rgba(180, 190, 255, 0.5);
 
         }
 
 
         input:checked
         + .slider
-        .sun-moon {
+        .cloud {
 
-            transform:
-                translateX(2em)
-                rotate(180deg);
+            opacity:
+                0;
 
         }
 
 
         input:checked
         + .slider
-        .sun-moon:before {
-
-            content:
-                "☾";
-
-            color:
-                #b9adff;
-
-        }
-
-
-        /* Estrellas */
-
         .stars {
 
-            position:
-                absolute;
-
-            width:
-                100%;
-
-            height:
-                100%;
-
-            pointer-events:
-                none;
+            opacity:
+                1;
 
         }
 
 
-        .star {
+
+        /* =====================================================
+           LUNA
+        ===================================================== */
+
+        .moon {
 
             position:
                 absolute;
 
             width:
-                4px;
+                1.1em;
 
             height:
-                4px;
+                1.1em;
 
-            fill:
-                white;
+            right:
+                0.42em;
+
+            top:
+                0.42em;
+
+            border-radius:
+                50%;
+
+            background:
+                #d8dcff;
 
             opacity:
                 0;
@@ -730,56 +776,44 @@
             transition:
                 0.4s;
 
-        }
-
-
-        .star:nth-child(1) {
-
-            top:
-                20%;
-
-            left:
-                15%;
+            z-index:
+                2;
 
         }
 
 
-        .star:nth-child(2) {
+        .moon:after {
 
-            top:
-                60%;
+            content:
+                "";
 
-            left:
-                30%;
+            position:
+                absolute;
 
-        }
+            width:
+                1.1em;
 
+            height:
+                1.1em;
 
-        .star:nth-child(3) {
+            border-radius:
+                50%;
 
-            top:
-                25%;
-
-            left:
-                65%;
-
-        }
-
-
-        .star:nth-child(4) {
-
-            top:
-                70%;
+            background:
+                #17203a;
 
             left:
-                80%;
+                -0.28em;
+
+            top:
+                -0.15em;
 
         }
 
 
         input:checked
         + .slider
-        .star {
+        .moon {
 
             opacity:
                 1;
@@ -804,7 +838,8 @@
                 42px;
 
             border:
-                1px solid var(--border);
+                1px solid
+                var(--border);
 
             border-radius:
                 10px;
@@ -848,17 +883,26 @@
 
 
         .menu-button span:nth-child(1) {
-            top: 13px;
+
+            top:
+                13px;
+
         }
 
 
         .menu-button span:nth-child(2) {
-            top: 20px;
+
+            top:
+                20px;
+
         }
 
 
         .menu-button span:nth-child(3) {
-            top: 27px;
+
+            top:
+                27px;
+
         }
 
 
@@ -928,16 +972,16 @@
 
                     circle at 50% 35%,
 
-                    var(--hero-glow) 0%,
+                    var(--hero-glow),
 
-                    transparent 45%
+                    transparent 48%
 
                 ),
 
                 var(--background);
 
             transition:
-                background 0.6s ease;
+                0.6s;
 
         }
 
@@ -959,7 +1003,8 @@
                 7px 15px;
 
             border:
-                1px solid #40366b;
+                1px solid
+                #40366b;
 
             border-radius:
                 50px;
@@ -1086,11 +1131,6 @@
             color:
                 white;
 
-            box-shadow:
-
-                0 8px 25px
-                rgba(124, 92, 255, 0.20);
-
         }
 
 
@@ -1102,24 +1142,17 @@
             background:
                 var(--primary-light);
 
-            box-shadow:
-
-                0 12px 30px
-                rgba(124, 92, 255, 0.30);
-
         }
 
 
         .secondary {
 
             border:
-                1px solid var(--border);
+                1px solid
+                var(--border);
 
             color:
                 var(--text-secondary);
-
-            background:
-                transparent;
 
         }
 
@@ -1127,20 +1160,17 @@
         .secondary:hover {
 
             background:
-                var(--surface-hover);
+                var(--surface);
 
             border-color:
-                var(--border-hover);
-
-            color:
-                var(--text);
+                var(--primary);
 
         }
 
 
 
         /* =====================================================
-           PRESENTACIÓN
+           INTRO
         ===================================================== */
 
         .intro {
@@ -1234,7 +1264,6 @@
                 grid;
 
             grid-template-columns:
-
                 repeat(
                     auto-fit,
                     minmax(220px, 1fr)
@@ -1258,15 +1287,19 @@
                 30px;
 
             background:
-                var(--surface-card);
+                var(--card);
 
             border:
-
                 1px solid
-                rgba(124, 92, 255, 0.12);
+                rgba(124, 92, 255, 0.15);
 
             box-shadow:
-                var(--card-shadow);
+
+                15px 15px 30px
+                rgba(0, 0, 0, 0.35),
+
+                -10px -10px 25px
+                rgba(100, 100, 120, 0.08);
 
             display:
                 flex;
@@ -1278,14 +1311,7 @@
                 center;
 
             transition:
-
-                transform 0.3s ease,
-
-                box-shadow 0.3s ease,
-
-                border-color 0.3s ease,
-
-                background 0.5s ease;
+                0.3s;
 
         }
 
@@ -1296,15 +1322,12 @@
                 translateY(-8px);
 
             border-color:
-                var(--border-hover);
+                var(--primary);
 
             box-shadow:
 
-                18px 18px 35px
-                rgba(70, 70, 90, 0.18),
-
                 0 0 30px
-                rgba(124, 92, 255, 0.12);
+                rgba(124, 92, 255, 0.15);
 
         }
 
@@ -1338,11 +1361,6 @@
             background:
                 rgba(124, 92, 255, 0.10);
 
-            border:
-
-                1px solid
-                rgba(124, 92, 255, 0.20);
-
         }
 
 
@@ -1354,9 +1372,6 @@
             font-size:
                 20px;
 
-            color:
-                var(--text);
-
         }
 
 
@@ -1367,9 +1382,6 @@
 
             font-size:
                 14px;
-
-            line-height:
-                1.6;
 
         }
 
@@ -1388,7 +1400,8 @@
                 center;
 
             border-top:
-                1px solid var(--border);
+                1px solid
+                var(--border);
 
             color:
                 var(--text-muted);
@@ -1405,9 +1418,6 @@
         ===================================================== */
 
         @media (max-width: 700px) {
-
-
-            /* Desactivar cursor personalizado */
 
             .custom-cursor {
 
@@ -1460,7 +1470,8 @@
                     var(--nav-background);
 
                 border-bottom:
-                    1px solid var(--border);
+                    1px solid
+                    var(--border);
 
                 overflow:
                     hidden;
@@ -1472,10 +1483,7 @@
                     0;
 
                 transition:
-
-                    max-height 0.35s ease,
-
-                    opacity 0.25s ease;
+                    0.35s;
 
             }
 
@@ -1503,23 +1511,13 @@
                     15px;
 
                 border-bottom:
-                    1px solid var(--border);
+                    1px solid
+                    var(--border);
 
             }
 
 
-            .menu a:hover {
-
-                background:
-                    var(--surface);
-
-                color:
-                    var(--text);
-
-            }
-
-
-            .theme-switch-container {
+            .theme-switch {
 
                 width:
                     100%;
@@ -1527,8 +1525,12 @@
                 padding:
                     15px 25px;
 
+                justify-content:
+                    flex-start;
+
                 border-bottom:
-                    1px solid var(--border);
+                    1px solid
+                    var(--border);
 
             }
 
@@ -1652,7 +1654,7 @@
 
 
     <!-- =====================================================
-         CURSOR PERSONALIZADO
+         CURSOR
     ===================================================== -->
 
     <div
@@ -1681,7 +1683,10 @@
         </div>
 
 
-        <div class="menu" id="menu">
+        <div
+            class="menu"
+            id="menu"
+        >
 
             <a href="index.html">
                 Inicio
@@ -1706,7 +1711,7 @@
 
             <!-- SWITCH -->
 
-            <div class="theme-switch-container">
+            <div class="theme-switch">
 
                 <label class="switch">
 
@@ -1715,59 +1720,35 @@
                         type="checkbox"
                     >
 
+
                     <div class="slider round">
 
-                        <div class="sun-moon"></div>
 
+                        <!-- NUBES -->
+
+                        <div class="cloud cloud-1"></div>
+
+                        <div class="cloud cloud-2"></div>
+
+                        <div class="cloud cloud-3"></div>
+
+
+                        <!-- LUNA -->
+
+                        <div class="moon"></div>
+
+
+                        <!-- ESTRELLAS -->
 
                         <div class="stars">
 
-                            <svg
-                                class="star"
-                                viewBox="0 0 20 20"
-                            >
+                            <div class="star star-1"></div>
 
-                                <path
-                                    d="M 0 10 C 10 10,10 10,0 10 C 10 10,10 10,10 20 C 10 10,10 10,20 10 C 10 10,10 10,10 0 C 10 10,10 10,0 10 Z"
-                                ></path>
+                            <div class="star star-2"></div>
 
-                            </svg>
+                            <div class="star star-3"></div>
 
-
-                            <svg
-                                class="star"
-                                viewBox="0 0 20 20"
-                            >
-
-                                <path
-                                    d="M 0 10 C 10 10,10 10,0 10 C 10 10,10 10,10 20 C 10 10,10 10,20 10 C 10 10,10 10,10 0 C 10 10,10 10,0 10 Z"
-                                ></path>
-
-                            </svg>
-
-
-                            <svg
-                                class="star"
-                                viewBox="0 0 20 20"
-                            >
-
-                                <path
-                                    d="M 0 10 C 10 10,10 10,0 10 C 10 10,10 10,10 20 C 10 10,10 10,20 10 C 10 10,10 10,10 0 C 10 10,10 10,0 10 Z"
-                                ></path>
-
-                            </svg>
-
-
-                            <svg
-                                class="star"
-                                viewBox="0 0 20 20"
-                            >
-
-                                <path
-                                    d="M 0 10 C 10 10,10 10,0 10 C 10 10,10 10,10 20 C 10 10,10 10,20 10 C 10 10,10 10,10 0 C 10 10,10 10,0 10 Z"
-                                ></path>
-
-                            </svg>
+                            <div class="star star-4"></div>
 
                         </div>
 
@@ -1780,8 +1761,7 @@
         </div>
 
 
-
-        <!-- BOTÓN HAMBURGUESA -->
+        <!-- HAMBURGUESA -->
 
         <button
             class="menu-button"
@@ -1790,7 +1770,9 @@
         >
 
             <span></span>
+
             <span></span>
+
             <span></span>
 
         </button>
@@ -1865,7 +1847,7 @@
 
 
     <!-- =====================================================
-         PRESENTACIÓN
+         INTRO
     ===================================================== -->
 
     <section class="intro">
@@ -1910,8 +1892,6 @@
         <div class="cards">
 
 
-            <!-- TARJETA 1 -->
-
             <div class="card">
 
                 <div class="icon">
@@ -1931,8 +1911,6 @@
 
             </div>
 
-
-            <!-- TARJETA 2 -->
 
             <div class="card">
 
@@ -1954,8 +1932,6 @@
             </div>
 
 
-            <!-- TARJETA 3 -->
-
             <div class="card">
 
                 <div class="icon">
@@ -1975,8 +1951,6 @@
 
             </div>
 
-
-            <!-- TARJETA 4 -->
 
             <div class="card">
 
@@ -2064,7 +2038,7 @@
         );
 
 
-        /* Cerrar menú al seleccionar */
+        /* Cerrar menú */
 
         const menuLinks =
             document.querySelectorAll(
@@ -2140,22 +2114,16 @@
         );
 
 
-        /* Movimiento suave */
-
         function animateCursor() {
-
-            const speed =
-                0.18;
-
 
             cursorX +=
                 (mouseX - cursorX)
-                * speed;
+                * 0.18;
 
 
             cursorY +=
                 (mouseY - cursorY)
-                * speed;
+                * 0.18;
 
 
             customCursor.style.transform =
@@ -2174,12 +2142,12 @@
 
 
         /* =====================================================
-           INTERACCIÓN DEL CURSOR
+           CURSOR SOBRE ELEMENTOS
         ===================================================== */
 
         const interactiveElements =
             document.querySelectorAll(
-                "a, button, .badge, .switch"
+                "a, button, .switch, .badge"
             );
 
 
@@ -2213,10 +2181,7 @@
         );
 
 
-
-        /* =====================================================
-           TARJETAS
-        ===================================================== */
+        /* Cursor sobre tarjetas */
 
         const cards =
             document.querySelectorAll(
@@ -2262,10 +2227,7 @@
         );
 
 
-
-        /* =====================================================
-           CLICK DEL CURSOR
-        ===================================================== */
+        /* Click */
 
         document.addEventListener(
             "mousedown",
@@ -2293,7 +2255,7 @@
 
 
         /* =====================================================
-           MODO CLARO / OSCURO
+           TEMA CLARO / OSCURO
         ===================================================== */
 
         const themeInput =
@@ -2302,10 +2264,6 @@
             );
 
 
-        /*
-            Recuperar el tema guardado.
-        */
-
         const savedTheme =
             localStorage.getItem(
                 "airmouse-theme"
@@ -2313,8 +2271,8 @@
 
 
         /*
-            Si el usuario había elegido
-            modo claro.
+            Si había un tema guardado,
+            lo recuperamos.
         */
 
         if (savedTheme === "light") {
@@ -2329,8 +2287,7 @@
         } else {
 
             /*
-                Por defecto:
-                modo oscuro.
+                Oscuro por defecto.
             */
 
             document.body.classList.remove(
@@ -2343,9 +2300,10 @@
         }
 
 
-        /*
-            Cambiar entre temas.
-        */
+
+        /* =====================================================
+           CAMBIAR TEMA
+        ===================================================== */
 
         themeInput.addEventListener(
             "change",
@@ -2354,7 +2312,9 @@
 
                 if (themeInput.checked) {
 
-                    /* MODO OSCURO */
+                    /*
+                        MODO OSCURO
+                    */
 
                     document.body.classList.remove(
                         "light-mode"
@@ -2368,7 +2328,9 @@
 
                 } else {
 
-                    /* MODO CLARO */
+                    /*
+                        MODO CLARO
+                    */
 
                     document.body.classList.add(
                         "light-mode"
