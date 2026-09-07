@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>El Proyecto | AirMouse</title>
 
+
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
 
         body {
             font-family: Arial, sans-serif;
@@ -18,131 +30,559 @@
             color: white;
         }
 
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        /* =========================
+           MENÚ
+        ========================= */
+
         nav {
-            padding: 20px 7%;
+            position: sticky;
+            top: 0;
+
+            width: 100%;
+
+            padding: 18px 7%;
+
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #242833;
-            background: #080a0f;
+
+            background: rgba(8, 10, 15, 0.95);
+
+            border-bottom: 1px solid #252a35;
+
+            z-index: 1000;
         }
+
 
         .logo {
             font-size: 24px;
             font-weight: bold;
+            letter-spacing: 1px;
         }
+
 
         .logo span {
             color: #7c5cff;
         }
 
-        nav a {
-            color: #aaa;
-            text-decoration: none;
-            font-size: 14px;
+
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 25px;
         }
+
+
+        .menu a {
+            color: #a9adb8;
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+
+        .menu a:hover {
+            color: white;
+        }
+
+
+        /* =========================
+           BOTÓN HAMBURGUESA
+        ========================= */
+
+        .menu-button {
+            display: none;
+
+            width: 42px;
+            height: 42px;
+
+            border: 1px solid #343946;
+            border-radius: 10px;
+
+            background: #10131a;
+
+            cursor: pointer;
+
+            position: relative;
+        }
+
+
+        .menu-button span {
+            position: absolute;
+
+            width: 20px;
+            height: 2px;
+
+            background: white;
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            transition: 0.3s;
+        }
+
+
+        .menu-button span:nth-child(1) {
+            top: 13px;
+        }
+
+
+        .menu-button span:nth-child(2) {
+            top: 20px;
+        }
+
+
+        .menu-button span:nth-child(3) {
+            top: 27px;
+        }
+
+
+        /* Animación → X */
+
+        .menu-button.active span:nth-child(1) {
+            top: 20px;
+
+            transform:
+                translateX(-50%)
+                rotate(45deg);
+        }
+
+
+        .menu-button.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+
+        .menu-button.active span:nth-child(3) {
+            top: 20px;
+
+            transform:
+                translateX(-50%)
+                rotate(-45deg);
+        }
+
+
+        /* =========================
+           CONTENIDO
+        ========================= */
 
         main {
             max-width: 900px;
+
             margin: auto;
+
             padding: 90px 25px;
         }
 
+
         h1 {
             font-size: 55px;
+
             margin-bottom: 25px;
         }
+
 
         h1 span {
             color: #7c5cff;
         }
 
+
         h2 {
             margin-top: 50px;
+
             margin-bottom: 15px;
         }
 
+
         p {
             color: #a5a9b5;
+
             line-height: 1.8;
+
             font-size: 17px;
         }
 
+
+        /* =========================
+           TARJETAS
+        ========================= */
+
         .card {
             margin-top: 30px;
+
             padding: 30px;
+
             border: 1px solid #272c37;
+
             border-radius: 18px;
+
             background: #10131a;
+
+            transition: 0.3s;
         }
+
+
+        .card:hover {
+            transform: translateY(-4px);
+
+            border-color: #6250bd;
+        }
+
+
+        /* =========================
+           BOTÓN VOLVER
+        ========================= */
 
         .back {
             display: inline-block;
+
             margin-top: 40px;
+
             padding: 13px 20px;
+
             background: #7c5cff;
+
             color: white;
-            text-decoration: none;
+
             border-radius: 9px;
+
+            transition: 0.3s;
         }
+
+
+        .back:hover {
+            background: #9278ff;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           CELULAR
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 14px 5%;
+            }
+
+
+            /* Menú cerrado */
+
+            .menu {
+                position: absolute;
+
+                top: 100%;
+                left: 0;
+
+                width: 100%;
+
+                display: flex;
+
+                flex-direction: column;
+
+                gap: 0;
+
+                background: rgba(8, 10, 15, 0.98);
+
+                border-bottom: 1px solid #252a35;
+
+                overflow: hidden;
+
+                max-height: 0;
+
+                opacity: 0;
+
+                transition:
+                    max-height 0.35s ease,
+                    opacity 0.25s ease;
+            }
+
+
+            /* Menú abierto */
+
+            .menu.active {
+                max-height: 400px;
+
+                opacity: 1;
+            }
+
+
+            /* Opciones */
+
+            .menu a {
+                width: 100%;
+
+                padding: 17px 25px;
+
+                font-size: 15px;
+
+                border-bottom: 1px solid #1d212a;
+
+                transition: 0.2s;
+            }
+
+
+            .menu a:hover {
+                background: #11141c;
+
+                color: white;
+
+                padding-left: 32px;
+            }
+
+
+            /* Botón ☰ */
+
+            .menu-button {
+                display: block;
+            }
+
+
+            /* Contenido */
+
+            main {
+                padding: 65px 20px;
+            }
+
+
+            h1 {
+                font-size: 43px;
+            }
+
+
+            p {
+                font-size: 16px;
+            }
+
+
+            .card {
+                padding: 24px;
+            }
+
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
+
+<!-- =========================
+     MENÚ
+========================= -->
+
 <nav>
+
+
     <div class="logo">
+
         <span>Air</span>Mouse
+
     </div>
 
-    <a href="index.html">← Inicio</a>
+
+    <div class="menu" id="menu">
+
+
+        <a href="index.html">
+            Inicio
+        </a>
+
+
+        <a href="proyecto.html">
+            Proyecto
+        </a>
+
+
+        <a href="funcionamiento.html">
+            Funcionamiento
+        </a>
+
+
+        <a href="software.html">
+            Software
+        </a>
+
+
+        <a href="compatibilidad.html">
+            Compatibilidad
+        </a>
+
+
+    </div>
+
+
+    <!-- BOTÓN HAMBURGUESA -->
+
+    <button
+        class="menu-button"
+        id="menuButton"
+        aria-label="Abrir menú"
+    >
+
+        <span></span>
+
+        <span></span>
+
+        <span></span>
+
+    </button>
+
+
 </nav>
+
+
+
+<!-- =========================
+     CONTENIDO
+========================= -->
 
 <main>
 
-    <h1>El <span>Proyecto</span></h1>
+
+    <h1>
+
+        El <span>Proyecto</span>
+
+    </h1>
+
 
     <p>
+
         AirMouse es un ratón aéreo inalámbrico basado en sistemas
         embebidos e interfaces inerciales.
+
     </p>
 
+
+
     <div class="card">
-        <h2>¿Qué buscamos?</h2>
+
+        <h2>
+            ¿Qué buscamos?
+        </h2>
+
 
         <p>
+
             El objetivo de AirMouse es desarrollar una alternativa
             intuitiva y personalizable para controlar dispositivos
             mediante movimientos naturales de la mano.
+
         </p>
+
     </div>
 
+
+
     <div class="card">
-        <h2>Accesibilidad</h2>
+
+        <h2>
+            Accesibilidad
+        </h2>
+
 
         <p>
+
             El proyecto está pensado especialmente para ofrecer una
             alternativa de interacción con baja exigencia motriz,
             buscando que pueda adaptarse a diferentes necesidades y
             preferencias.
+
         </p>
+
     </div>
 
+
+
     <div class="card">
-        <h2>Tecnología</h2>
+
+        <h2>
+            Tecnología
+        </h2>
+
 
         <p>
+
             AirMouse utiliza un sensor MPU6050 para detectar el
             movimiento y un ESP32 para procesar la información y
             comunicarse de forma inalámbrica.
+
         </p>
+
     </div>
 
-    <a class="back" href="index.html">
+
+
+    <a
+        class="back"
+        href="index.html"
+    >
+
         Volver al inicio
+
     </a>
+
 
 </main>
 
+
+
+<!-- =========================
+     JAVASCRIPT DEL MENÚ
+========================= -->
+
+<script>
+
+    const menuButton =
+        document.getElementById("menuButton");
+
+    const menu =
+        document.getElementById("menu");
+
+
+    menuButton.addEventListener("click", function () {
+
+        menu.classList.toggle("active");
+
+        menuButton.classList.toggle("active");
+
+    });
+
+
+    /* Cerrar menú al seleccionar una página */
+
+    const menuLinks =
+        document.querySelectorAll(".menu a");
+
+
+    menuLinks.forEach(function (link) {
+
+        link.addEventListener("click", function () {
+
+            menu.classList.remove("active");
+
+            menuButton.classList.remove("active");
+
+        });
+
+    });
+
+</script>
+
+
 </body>
+
 </html>
