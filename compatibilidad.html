@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 
@@ -10,20 +11,94 @@
 
     <style>
 
+        /* =====================================================
+           VARIABLES DEL TEMA
+        ===================================================== */
+
+        :root {
+            --background: #080a0f;
+            --nav-background: rgba(8, 10, 15, 0.95);
+            --card-background: #10131a;
+            --border: #252a35;
+            --card-border: #272c37;
+            --text: white;
+            --secondary-text: #a9adb8;
+            --paragraph: #9297a4;
+            --button-background: #7c5cff;
+            --button-hover: #9278ff;
+            --status-background: #191d26;
+            --status-text: #a99cff;
+            --menu-background: rgba(8, 10, 15, 0.98);
+            --menu-hover: #11141c;
+        }
+
+        body.light-theme {
+            --background: #f4f5f8;
+            --nav-background: rgba(255, 255, 255, 0.95);
+            --card-background: #ffffff;
+            --border: #dedfe5;
+            --card-border: #dedfe5;
+            --text: #15171c;
+            --secondary-text: #5e626d;
+            --paragraph: #626672;
+            --button-background: #7c5cff;
+            --button-hover: #6849ee;
+            --status-background: #f0edff;
+            --status-text: #684fe0;
+            --menu-background: rgba(255, 255, 255, 0.98);
+            --menu-hover: #f1f1f5;
+        }
+
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+
+            /* ELIMINA EL CURSOR DEL SISTEMA */
+            cursor: none !important;
+        }
+
+        html,
+        html *,
+        body,
+        body * {
+            cursor: none !important;
         }
 
         html {
             scroll-behavior: smooth;
+            cursor: none !important;
         }
 
         body {
             font-family: Arial, sans-serif;
-            background: #080a0f;
-            color: white;
+
+            background: var(--background);
+            color: var(--text);
+
+            cursor: none !important;
+
+            transition:
+                background 0.35s ease,
+                color 0.35s ease;
+        }
+
+        a,
+        button,
+        input,
+        label,
+        .menu-button,
+        .menu a,
+        .device,
+        .back,
+        .switch,
+        .slider {
+            cursor: none !important;
         }
 
         a {
@@ -32,31 +107,146 @@
         }
 
 
-        /* =========================
+        /* =====================================================
+           CURSOR PERSONALIZADO
+        ===================================================== */
+
+        .custom-cursor {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 0;
+            height: 0;
+
+            pointer-events: none !important;
+
+            z-index: 2147483647;
+
+            opacity: 0;
+
+            cursor: none !important;
+
+            will-change: transform;
+        }
+
+        .custom-cursor *,
+        .custom-cursor::before,
+        .custom-cursor::after {
+            pointer-events: none !important;
+            cursor: none !important;
+        }
+
+        .cursor-dot {
+            position: absolute;
+
+            width: 8px;
+            height: 8px;
+
+            left: -4px;
+            top: -4px;
+
+            border-radius: 50%;
+
+            background: #ffffff;
+
+            box-shadow:
+                0 0 8px rgba(124, 92, 255, 0.9),
+                0 0 18px rgba(124, 92, 255, 0.6);
+
+            transition:
+                transform 0.2s ease,
+                width 0.2s ease,
+                height 0.2s ease;
+        }
+
+        .cursor-ring {
+            position: absolute;
+
+            width: 30px;
+            height: 30px;
+
+            left: -15px;
+            top: -15px;
+
+            border: 2px solid #7c5cff;
+
+            border-radius: 50%;
+
+            transition:
+                width 0.25s ease,
+                height 0.25s ease,
+                left 0.25s ease,
+                top 0.25s ease,
+                border-color 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .custom-cursor.hovering .cursor-ring {
+            width: 44px;
+            height: 44px;
+
+            left: -22px;
+            top: -22px;
+
+            border-color: #9278ff;
+        }
+
+        .custom-cursor.card-hover .cursor-ring {
+            width: 52px;
+            height: 52px;
+
+            left: -26px;
+            top: -26px;
+        }
+
+        .custom-cursor.clicking .cursor-dot {
+            transform: scale(0.65);
+        }
+
+        .custom-cursor.clicking .cursor-ring {
+            transform: scale(0.8);
+        }
+
+
+        /* =====================================================
            MENÚ
-        ========================= */
+        ===================================================== */
 
         nav {
             position: sticky;
+
             top: 0;
+
             width: 100%;
 
             padding: 18px 7%;
 
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
 
-            background: rgba(8, 10, 15, 0.95);
+            background: var(--nav-background);
 
-            border-bottom: 1px solid #252a35;
+            border-bottom: 1px solid var(--border);
+
+            backdrop-filter: blur(12px);
 
             z-index: 1000;
+
+            transition:
+                background 0.35s ease,
+                border-color 0.35s ease;
         }
 
         .logo {
             font-size: 24px;
+
             font-weight: bold;
+
             letter-spacing: 1px;
         }
 
@@ -65,30 +255,249 @@
         }
 
 
-        /* =========================
+        /* =====================================================
            MENÚ NORMAL
-        ========================= */
+        ===================================================== */
 
         .menu {
             display: flex;
+
             align-items: center;
+
             gap: 25px;
         }
 
         .menu a {
-            color: #a9adb8;
+            color: var(--secondary-text);
+
             font-size: 14px;
-            transition: 0.3s;
+
+            transition:
+                color 0.3s ease;
         }
 
         .menu a:hover {
-            color: white;
+            color: var(--text);
         }
 
 
-        /* =========================
+        /* =====================================================
+           SWITCH DARK / LIGHT
+        ===================================================== */
+
+        .theme-switch {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+        .switch {
+            position: relative;
+
+            display: inline-block;
+
+            width: 62px;
+            height: 32px;
+
+            cursor: none !important;
+        }
+
+        .switch input {
+            opacity: 0;
+
+            width: 0;
+            height: 0;
+
+            position: absolute;
+        }
+
+        .slider {
+            position: absolute;
+
+            inset: 0;
+
+            border-radius: 50px;
+
+            background: #151923;
+
+            border: 1px solid #343946;
+
+            overflow: hidden;
+
+            transition:
+                0.35s ease;
+
+            cursor: none !important;
+        }
+
+        .slider::before {
+            content: "";
+
+            position: absolute;
+
+            width: 24px;
+            height: 24px;
+
+            left: 3px;
+            top: 3px;
+
+            border-radius: 50%;
+
+            background: #f5f5f5;
+
+            box-shadow:
+                0 2px 8px rgba(0, 0, 0, 0.35);
+
+            transition:
+                0.35s ease;
+
+            z-index: 5;
+        }
+
+        .switch input:checked + .slider {
+            background: #dfe4ee;
+
+            border-color: #c8ccd5;
+        }
+
+        .switch input:checked + .slider::before {
+            transform: translateX(30px);
+
+            background: #ffffff;
+        }
+
+
+        /* =====================================================
+           NUBES
+        ===================================================== */
+
+        .cloud {
+            position: absolute;
+
+            background: #ffffff;
+
+            border-radius: 50%;
+
+            opacity: 0;
+
+            transition:
+                opacity 0.3s ease;
+        }
+
+        .cloud-1 {
+            width: 15px;
+            height: 8px;
+
+            right: 7px;
+            top: 8px;
+        }
+
+        .cloud-2 {
+            width: 11px;
+            height: 7px;
+
+            right: 17px;
+            top: 12px;
+        }
+
+        .cloud-3 {
+            width: 10px;
+            height: 6px;
+
+            right: 5px;
+            top: 14px;
+        }
+
+        .switch input:checked + .slider .cloud {
+            opacity: 1;
+        }
+
+
+        /* =====================================================
+           LUNA
+        ===================================================== */
+
+        .moon {
+            position: absolute;
+
+            width: 15px;
+            height: 15px;
+
+            left: 8px;
+            top: 8px;
+
+            border-radius: 50%;
+
+            background: #ffffff;
+
+            box-shadow:
+                5px -2px 0 #151923;
+
+            transition:
+                opacity 0.3s ease;
+        }
+
+        .switch input:checked + .slider .moon {
+            opacity: 0;
+        }
+
+
+        /* =====================================================
+           ESTRELLAS
+        ===================================================== */
+
+        .stars {
+            position: absolute;
+
+            inset: 0;
+
+            opacity: 1;
+
+            transition:
+                opacity 0.3s ease;
+        }
+
+        .star {
+            position: absolute;
+
+            width: 2px;
+            height: 2px;
+
+            background: #ffffff;
+
+            border-radius: 50%;
+        }
+
+        .star-1 {
+            left: 20px;
+            top: 7px;
+        }
+
+        .star-2 {
+            left: 28px;
+            top: 13px;
+        }
+
+        .star-3 {
+            left: 18px;
+            top: 21px;
+        }
+
+        .star-4 {
+            left: 32px;
+            top: 23px;
+        }
+
+        .switch input:checked + .slider .stars {
+            opacity: 0;
+        }
+
+
+        /* =====================================================
            BOTÓN HAMBURGUESA
-        ========================= */
+        ===================================================== */
 
         .menu-button {
             display: none;
@@ -97,11 +506,12 @@
             height: 42px;
 
             border: 1px solid #343946;
+
             border-radius: 10px;
 
             background: #10131a;
 
-            cursor: pointer;
+            cursor: none !important;
 
             position: relative;
         }
@@ -134,7 +544,9 @@
         }
 
 
-        /* ☰ se transforma en X */
+        /* =====================================================
+           HAMBURGUESA -> X
+        ===================================================== */
 
         .menu-button.active span:nth-child(1) {
             top: 20px;
@@ -157,9 +569,9 @@
         }
 
 
-        /* =========================
+        /* =====================================================
            CONTENIDO
-        ========================= */
+        ===================================================== */
 
         main {
             max-width: 1000px;
@@ -182,17 +594,22 @@
         }
 
         .subtitle {
-            color: #999eaa;
+            color: var(--paragraph);
 
             margin-bottom: 55px;
 
             font-size: 17px;
+
+            line-height: 1.6;
+
+            transition:
+                color 0.35s ease;
         }
 
 
-        /* =========================
+        /* =====================================================
            DISPOSITIVOS
-        ========================= */
+        ===================================================== */
 
         .devices {
             display: grid;
@@ -204,15 +621,18 @@
         }
 
         .device {
-            background: #10131a;
+            background: var(--card-background);
 
-            border: 1px solid #272c37;
+            border: 1px solid var(--card-border);
 
             border-radius: 20px;
 
             padding: 35px 20px;
 
-            transition: 0.3s;
+            transition:
+                0.3s ease,
+                background 0.35s ease,
+                border-color 0.35s ease;
         }
 
         .device:hover {
@@ -232,9 +652,12 @@
         }
 
         .device p {
-            color: #9297a4;
+            color: var(--paragraph);
 
             line-height: 1.7;
+
+            transition:
+                color 0.35s ease;
         }
 
         .status {
@@ -246,17 +669,21 @@
 
             border-radius: 50px;
 
-            background: #191d26;
+            background: var(--status-background);
 
-            color: #a99cff;
+            color: var(--status-text);
 
             font-size: 12px;
+
+            transition:
+                background 0.35s ease,
+                color 0.35s ease;
         }
 
 
-        /* =========================
+        /* =====================================================
            BOTÓN VOLVER
-        ========================= */
+        ===================================================== */
 
         .back {
             display: inline-block;
@@ -265,25 +692,26 @@
 
             padding: 13px 20px;
 
-            background: #7c5cff;
+            background: var(--button-background);
 
             color: white;
 
             border-radius: 9px;
 
-            transition: 0.3s;
+            transition:
+                0.3s ease;
         }
 
         .back:hover {
-            background: #9278ff;
+            background: var(--button-hover);
 
             transform: translateY(-2px);
         }
 
 
-        /* =========================
+        /* =====================================================
            CELULAR
-        ========================= */
+        ===================================================== */
 
         @media (max-width: 700px) {
 
@@ -308,9 +736,9 @@
 
                 gap: 0;
 
-                background: rgba(8, 10, 15, 0.98);
+                background: var(--menu-background);
 
-                border-bottom: 1px solid #252a35;
+                border-bottom: 1px solid var(--border);
 
                 overflow: hidden;
 
@@ -321,13 +749,15 @@
                 transition:
                     max-height 0.35s ease,
                     opacity 0.25s ease;
+
+                backdrop-filter: blur(12px);
             }
 
 
             /* Menú abierto */
 
             .menu.active {
-                max-height: 400px;
+                max-height: 500px;
 
                 opacity: 1;
             }
@@ -342,17 +772,31 @@
 
                 font-size: 15px;
 
-                border-bottom: 1px solid #1d212a;
+                border-bottom: 1px solid var(--border);
 
-                transition: 0.2s;
+                transition:
+                    0.2s;
             }
 
             .menu a:hover {
-                background: #11141c;
+                background: var(--menu-hover);
 
-                color: white;
+                color: var(--text);
 
                 padding-left: 32px;
+            }
+
+
+            /* Switch */
+
+            .theme-switch {
+                width: 100%;
+
+                padding: 15px 25px;
+
+                justify-content: flex-start;
+
+                border-bottom: 1px solid var(--border);
             }
 
 
@@ -397,9 +841,27 @@
 <body>
 
 
-<!-- =========================
+<!-- =====================================================
+     CURSOR PERSONALIZADO
+===================================================== -->
+
+<div
+    class="custom-cursor"
+    id="customCursor"
+    aria-hidden="true"
+>
+
+    <div class="cursor-ring"></div>
+
+    <div class="cursor-dot"></div>
+
+</div>
+
+
+
+<!-- =====================================================
      MENÚ
-========================= -->
+===================================================== -->
 
 <nav>
 
@@ -439,6 +901,56 @@
         </a>
 
 
+        <!-- =================================================
+             SWITCH DARK / LIGHT
+        ================================================== -->
+
+        <div class="theme-switch">
+
+            <label class="switch">
+
+                <input
+                    id="themeInput"
+                    type="checkbox"
+                >
+
+                <div class="slider round">
+
+                    <!-- NUBES -->
+
+                    <div class="cloud cloud-1"></div>
+
+                    <div class="cloud cloud-2"></div>
+
+                    <div class="cloud cloud-3"></div>
+
+
+                    <!-- LUNA -->
+
+                    <div class="moon"></div>
+
+
+                    <!-- ESTRELLAS -->
+
+                    <div class="stars">
+
+                        <div class="star star-1"></div>
+
+                        <div class="star star-2"></div>
+
+                        <div class="star star-3"></div>
+
+                        <div class="star star-4"></div>
+
+                    </div>
+
+                </div>
+
+            </label>
+
+        </div>
+
+
     </div>
 
 
@@ -451,7 +963,9 @@
     >
 
         <span></span>
+
         <span></span>
+
         <span></span>
 
     </button>
@@ -461,9 +975,9 @@
 
 
 
-<!-- =========================
+<!-- =====================================================
      CONTENIDO
-========================= -->
+===================================================== -->
 
 <main>
 
@@ -486,6 +1000,10 @@
 
     <div class="devices">
 
+
+        <!-- =================================================
+             PC
+        ================================================== -->
 
         <div class="device">
 
@@ -514,6 +1032,10 @@
 
 
 
+        <!-- =================================================
+             ANDROID
+        ================================================== -->
+
         <div class="device">
 
             <div class="icon">
@@ -540,6 +1062,10 @@
         </div>
 
 
+
+        <!-- =================================================
+             ANDROID TV
+        ================================================== -->
 
         <div class="device">
 
@@ -571,6 +1097,8 @@
 
 
 
+    <!-- BOTÓN VOLVER -->
+
     <a
         class="back"
         href="index.html"
@@ -585,11 +1113,16 @@
 
 
 
-<!-- =========================
-     JAVASCRIPT DEL MENÚ
-========================= -->
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
 
 <script>
+
+
+    /* =====================================================
+       MENÚ HAMBURGUESA
+    ===================================================== */
 
     const menuButton =
         document.getElementById("menuButton");
@@ -598,36 +1131,301 @@
         document.getElementById("menu");
 
 
-    menuButton.addEventListener("click", function () {
+    menuButton.addEventListener(
+        "click",
+        function () {
 
-        menu.classList.toggle("active");
+            menu.classList.toggle("active");
 
-        menuButton.classList.toggle("active");
+            menuButton.classList.toggle("active");
 
-    });
+        }
+    );
 
 
-    /* Cerrar menú al seleccionar una página */
+    /* =====================================================
+       CERRAR MENÚ AL SELECCIONAR UNA PÁGINA
+    ===================================================== */
 
     const menuLinks =
         document.querySelectorAll(".menu a");
 
 
-    menuLinks.forEach(function (link) {
+    menuLinks.forEach(
+        function (link) {
 
-        link.addEventListener("click", function () {
+            link.addEventListener(
+                "click",
+                function () {
 
-            menu.classList.remove("active");
+                    menu.classList.remove("active");
 
-            menuButton.classList.remove("active");
+                    menuButton.classList.remove("active");
 
-        });
+                }
+            );
 
-    });
+        }
+    );
+
+
+    /* =====================================================
+       TEMA DARK / LIGHT
+       SE GUARDA PARA TODAS LAS PÁGINAS
+    ===================================================== */
+
+    const themeInput =
+        document.getElementById("themeInput");
+
+    const savedTheme =
+        localStorage.getItem("airmouse-theme");
+
+
+    /* Aplicar tema guardado */
+
+    if (savedTheme === "light") {
+
+        document.body.classList.add("light-theme");
+
+        themeInput.checked = true;
+
+    } else {
+
+        document.body.classList.remove("light-theme");
+
+        themeInput.checked = false;
+
+    }
+
+
+    /* Cambiar tema */
+
+    themeInput.addEventListener(
+        "change",
+        function () {
+
+            if (themeInput.checked) {
+
+                document.body.classList.add("light-theme");
+
+                localStorage.setItem(
+                    "airmouse-theme",
+                    "light"
+                );
+
+            } else {
+
+                document.body.classList.remove("light-theme");
+
+                localStorage.setItem(
+                    "airmouse-theme",
+                    "dark"
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       CURSOR PERSONALIZADO
+    ===================================================== */
+
+    const customCursor =
+        document.getElementById("customCursor");
+
+
+    let mouseX = 0;
+    let mouseY = 0;
+
+    let cursorX = 0;
+    let cursorY = 0;
+
+
+    document.addEventListener(
+        "mousemove",
+        function (event) {
+
+            mouseX = event.clientX;
+
+            mouseY = event.clientY;
+
+            customCursor.style.opacity = "1";
+
+        }
+    );
+
+
+    document.addEventListener(
+        "mouseleave",
+        function () {
+
+            customCursor.style.opacity = "0";
+
+        }
+    );
+
+
+    /* Movimiento suave */
+
+    function animateCursor() {
+
+        cursorX +=
+            (mouseX - cursorX) * 0.18;
+
+        cursorY +=
+            (mouseY - cursorY) * 0.18;
+
+
+        customCursor.style.transform =
+            `translate3d(${cursorX}px, ${cursorY}px, 0)`;
+
+
+        requestAnimationFrame(
+            animateCursor
+        );
+
+    }
+
+
+    animateCursor();
+
+
+    /* =====================================================
+       EFECTO HOVER DEL CURSOR
+    ===================================================== */
+
+    const interactiveElements =
+        document.querySelectorAll(
+            "a, button, .device, .switch"
+        );
+
+
+    interactiveElements.forEach(
+        function (element) {
+
+            element.addEventListener(
+                "mouseenter",
+                function () {
+
+                    customCursor.classList.add(
+                        "hovering"
+                    );
+
+                }
+            );
+
+
+            element.addEventListener(
+                "mouseleave",
+                function () {
+
+                    customCursor.classList.remove(
+                        "hovering"
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       EFECTO ESPECIAL EN TARJETAS
+    ===================================================== */
+
+    const cards =
+        document.querySelectorAll(".device");
+
+
+    cards.forEach(
+        function (card) {
+
+            card.addEventListener(
+                "mouseenter",
+                function () {
+
+                    customCursor.classList.add(
+                        "hovering"
+                    );
+
+                    customCursor.classList.add(
+                        "card-hover"
+                    );
+
+                }
+            );
+
+
+            card.addEventListener(
+                "mouseleave",
+                function () {
+
+                    customCursor.classList.remove(
+                        "hovering"
+                    );
+
+                    customCursor.classList.remove(
+                        "card-hover"
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       EFECTO AL HACER CLICK
+    ===================================================== */
+
+    document.addEventListener(
+        "mousedown",
+        function () {
+
+            customCursor.classList.add(
+                "clicking"
+            );
+
+        }
+    );
+
+
+    document.addEventListener(
+        "mouseup",
+        function () {
+
+            customCursor.classList.remove(
+                "clicking"
+            );
+
+        }
+    );
+
+
+    document.addEventListener(
+        "mouseout",
+        function (event) {
+
+            if (!event.relatedTarget) {
+
+                customCursor.classList.remove(
+                    "clicking"
+                );
+
+            }
+
+        }
+    );
+
 
 </script>
 
 
 </body>
 
-    </html>
+</html>
+```
