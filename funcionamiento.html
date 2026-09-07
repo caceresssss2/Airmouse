@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cómo funciona | AirMouse</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #080a0f;
+            color: white;
+        }
+
+        nav {
+            padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #242833;
+        }
+
+        nav a {
+            color: #aaa;
+            text-decoration: none;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #7c5cff;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: auto;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        h1 span {
+            color: #7c5cff;
+        }
+
+        .subtitle {
+            color: #999eaa;
+            margin-bottom: 60px;
+        }
+
+        .process {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .step {
+            padding: 30px 20px;
+            background: #10131a;
+            border: 1px solid #272c37;
+            border-radius: 18px;
+        }
+
+        .number {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto auto 20px;
+            background: #7c5cff;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+
+        .step p {
+            margin-top: 10px;
+            color: #9297a4;
+            line-height: 1.6;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 50px;
+            padding: 13px 20px;
+            background: #7c5cff;
+            color: white;
+            text-decoration: none;
+            border-radius: 9px;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">
+        <span>Air</span>Mouse
+    </div>
+
+    <a href="index.html">← Inicio</a>
+</nav>
+
+<main>
+
+    <h1>¿Cómo <span>funciona?</span></h1>
+
+    <p class="subtitle">
+        El movimiento de tu mano se transforma en acciones digitales.
+    </p>
+
+    <div class="process">
+
+        <div class="step">
+            <div class="number">1</div>
+            <h2>Movimiento</h2>
+            <p>
+                El usuario realiza un movimiento natural con la mano.
+            </p>
+        </div>
+
+        <div class="step">
+            <div class="number">2</div>
+            <h2>MPU6050</h2>
+            <p>
+                El sensor detecta la orientación y el movimiento.
+            </p>
+        </div>
+
+        <div class="step">
+            <div class="number">3</div>
+            <h2>ESP32</h2>
+            <p>
+                El microcontrolador procesa los datos recibidos.
+            </p>
+        </div>
+
+        <div class="step">
+            <div class="number">4</div>
+            <h2>Bluetooth</h2>
+            <p>
+                La información se transmite de forma inalámbrica.
+            </p>
+        </div>
+
+    </div>
+
+    <a class="back" href="index.html">
+        Volver al inicio
+    </a>
+
+</main>
+
+</body>
+  </html>
