@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Proyecto | AirMouse</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #080a0f;
+            color: white;
+        }
+
+        nav {
+            padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #242833;
+            background: #080a0f;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #7c5cff;
+        }
+
+        nav a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        main {
+            max-width: 900px;
+            margin: auto;
+            padding: 90px 25px;
+        }
+
+        h1 {
+            font-size: 55px;
+            margin-bottom: 25px;
+        }
+
+        h1 span {
+            color: #7c5cff;
+        }
+
+        h2 {
+            margin-top: 50px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #a5a9b5;
+            line-height: 1.8;
+            font-size: 17px;
+        }
+
+        .card {
+            margin-top: 30px;
+            padding: 30px;
+            border: 1px solid #272c37;
+            border-radius: 18px;
+            background: #10131a;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 13px 20px;
+            background: #7c5cff;
+            color: white;
+            text-decoration: none;
+            border-radius: 9px;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">
+        <span>Air</span>Mouse
+    </div>
+
+    <a href="index.html">← Inicio</a>
+</nav>
+
+<main>
+
+    <h1>El <span>Proyecto</span></h1>
+
+    <p>
+        AirMouse es un ratón aéreo inalámbrico basado en sistemas
+        embebidos e interfaces inerciales.
+    </p>
+
+    <div class="card">
+        <h2>¿Qué buscamos?</h2>
+
+        <p>
+            El objetivo de AirMouse es desarrollar una alternativa
+            intuitiva y personalizable para controlar dispositivos
+            mediante movimientos naturales de la mano.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>Accesibilidad</h2>
+
+        <p>
+            El proyecto está pensado especialmente para ofrecer una
+            alternativa de interacción con baja exigencia motriz,
+            buscando que pueda adaptarse a diferentes necesidades y
+            preferencias.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>Tecnología</h2>
+
+        <p>
+            AirMouse utiliza un sensor MPU6050 para detectar el
+            movimiento y un ESP32 para procesar la información y
+            comunicarse de forma inalámbrica.
+        </p>
+    </div>
+
+    <a class="back" href="index.html">
+        Volver al inicio
+    </a>
+
+</main>
+
+</body>
+</html>
