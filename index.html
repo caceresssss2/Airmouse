@@ -1,1312 +1,1276 @@
 <!DOCTYPE html>
+
 <html lang="es">
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+```
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AirMouse | Una nueva forma de interactuar</title>
+<title>AirMouse | Una nueva forma de interactuar</title>
 
-    <meta name="description"
-        content="AirMouse - Ratón aéreo inalámbrico basado en sistemas embebidos e interfaces inerciales.">
+<meta name="description"
+    content="AirMouse - Ratón aéreo inalámbrico basado en sistemas embebidos e interfaces inerciales.">
 
-    <style>
+<style>
 
-        /* =====================================================
-           VARIABLES
-        ===================================================== */
+    /* =====================================================
+       VARIABLES
+    ===================================================== */
 
-        :root {
+    :root {
 
-            --background: #080a0f;
-            --surface: #10131a;
-            --card: #181a20;
+        --background: #080a0f;
+        --surface: #10131a;
+        --card: #181a20;
 
-            --border: #252a35;
+        --border: #252a35;
 
-            --text: #ffffff;
-            --text-secondary: #a6abb7;
-            --text-muted: #9297a4;
+        --text: #ffffff;
+        --text-secondary: #a6abb7;
+        --text-muted: #9297a4;
 
-            --primary: #7c5cff;
-            --primary-light: #a89aff;
+        --primary: #7c5cff;
+        --primary-light: #a89aff;
 
-            --nav-background: rgba(8, 10, 15, 0.88);
+        --nav-background: rgba(8, 10, 15, 0.88);
 
-            --hero-glow: rgba(124, 92, 255, 0.20);
+        --hero-glow: rgba(124, 92, 255, 0.20);
 
-        }
+    }
 
 
-        /* =====================================================
-           MODO CLARO
-        ===================================================== */
+    /* =====================================================
+       MODO CLARO
+    ===================================================== */
 
-        body.light-mode {
+    body.light-mode {
 
-            --background: #eef7ff;
-            --surface: #ffffff;
-            --card: #ffffff;
+        --background: #eef7ff;
+        --surface: #ffffff;
+        --card: #ffffff;
 
-            --border: #dce5ef;
+        --border: #dce5ef;
 
-            --text: #17191f;
-            --text-secondary: #596273;
-            --text-muted: #697385;
+        --text: #17191f;
+        --text-secondary: #596273;
+        --text-muted: #697385;
 
-            --primary: #6846e8;
-            --primary-light: #795cff;
+        --primary: #6846e8;
+        --primary-light: #795cff;
 
-            --nav-background: rgba(255, 255, 255, 0.88);
+        --nav-background: rgba(255, 255, 255, 0.88);
 
-            --hero-glow: rgba(75, 174, 255, 0.22);
+        --hero-glow: rgba(75, 174, 255, 0.22);
 
-        }
+    }
 
 
-        /* =====================================================
-           GENERAL
-        ===================================================== */
+    /* =====================================================
+       GENERAL
+    ===================================================== */
 
-        * {
+    * {
 
-            box-sizing:
-                border-box;
+        box-sizing: border-box;
 
-            margin:
-                0;
+        margin: 0;
 
-            padding:
-                0;
+        padding: 0;
 
-        }
+        /*
+         * OCULTA EL CURSOR NATIVO EN TODOS
+         * LOS ELEMENTOS DE LA PÁGINA.
+         */
+        cursor: none !important;
 
+    }
 
-        /* =====================================================
-           OCULTAR CURSOR DEL SISTEMA
-        ===================================================== */
 
-        *,
-        *::before,
-        *::after {
+    html,
+    html * {
 
-            cursor: none !important;
+        cursor: none !important;
 
-        }
+    }
 
 
-        html {
+    body,
+    body * {
 
-            scroll-behavior:
-                smooth;
+        cursor: none !important;
 
-        }
+    }
 
 
-        body {
+    html {
 
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
+        scroll-behavior: smooth;
 
-            background:
-                var(--background);
+        cursor: none !important;
 
-            color:
-                var(--text);
+    }
 
-            line-height:
-                1.6;
 
-            cursor:
-                none !important;
+    body {
 
-            transition:
+        font-family:
+            Arial,
+            Helvetica,
+            sans-serif;
 
-                background 0.6s ease,
+        background:
+            var(--background);
 
-                color 0.5s ease;
+        color:
+            var(--text);
 
-        }
+        line-height:
+            1.6;
 
+        cursor:
+            none !important;
 
-        a {
+        transition:
+            background 0.6s ease,
+            color 0.5s ease;
 
-            text-decoration:
-                none;
+    }
 
-            color:
-                inherit;
 
-        }
+    a,
+    button,
+    input,
+    label,
+    .button,
+    .switch,
+    .slider,
+    .card,
+    .menu-button,
+    .badge {
 
+        cursor: none !important;
 
+    }
 
-        /* =====================================================
-           CURSOR PERSONALIZADO
-        ===================================================== */
 
-        .custom-cursor {
+    a {
 
-            position:
-                fixed;
+        text-decoration: none;
 
-            top:
-                0;
+        color: inherit;
 
-            left:
-                0;
+    }
 
-            pointer-events:
-                none;
 
-            z-index:
-                99999;
 
-            opacity:
-                0;
+    /* =====================================================
+       CURSOR PERSONALIZADO
+    ===================================================== */
 
-        }
+    .custom-cursor {
 
+        position: fixed;
 
-        .cursor-dot {
+        top: 0;
 
-            position:
-                absolute;
+        left: 0;
 
-            width:
-                7px;
+        width: 0;
 
-            height:
-                7px;
+        height: 0;
 
-            border-radius:
-                50%;
+        pointer-events: none !important;
 
-            background:
-                var(--primary);
+        z-index: 2147483647;
 
-            box-shadow:
+        opacity: 0;
 
-                0 0 8px
-                var(--primary),
+        cursor: none !important;
 
-                0 0 18px
-                rgba(124, 92, 255, 0.5);
+        will-change: transform;
 
-            transform:
-                translate(-50%, -50%);
+    }
 
-            transition:
-                0.2s;
 
-        }
+    .custom-cursor *,
+    .custom-cursor::before,
+    .custom-cursor::after {
 
+        pointer-events: none !important;
 
-        .cursor-ring {
+        cursor: none !important;
 
-            position:
-                absolute;
+    }
 
-            width:
-                34px;
 
-            height:
-                34px;
+    .cursor-dot {
 
-            border-radius:
-                50%;
+        position: absolute;
 
-            border:
-                1.5px solid
-                rgba(124, 92, 255, 0.65);
+        width: 7px;
 
-            transform:
-                translate(-50%, -50%);
+        height: 7px;
 
-            transition:
-                0.25s;
+        border-radius: 50%;
 
-        }
+        background:
+            var(--primary);
 
+        box-shadow:
+            0 0 8px var(--primary),
+            0 0 18px rgba(124, 92, 255, 0.5);
 
-        .custom-cursor.hovering
-        .cursor-ring {
+        transform:
+            translate(-50%, -50%);
 
-            width:
-                52px;
+        transition:
+            0.2s;
 
-            height:
-                52px;
+        pointer-events: none !important;
 
-            border-color:
-                rgba(124, 92, 255, 0.95);
+    }
 
-            background:
-                rgba(124, 92, 255, 0.08);
 
-            box-shadow:
-                0 0 20px
-                rgba(124, 92, 255, 0.25);
+    .cursor-ring {
 
-        }
+        position: absolute;
 
+        width: 34px;
 
-        .custom-cursor.hovering
-        .cursor-dot {
+        height: 34px;
 
-            width:
-                11px;
+        border-radius: 50%;
 
-            height:
-                11px;
+        border:
+            1.5px solid
+            rgba(124, 92, 255, 0.65);
 
-        }
+        transform:
+            translate(-50%, -50%);
 
+        transition:
+            0.25s;
 
-        .custom-cursor.card-hover
-        .cursor-ring {
+        pointer-events: none !important;
 
-            width:
-                65px;
+    }
 
-            height:
-                65px;
 
-            border-color:
-                #a89aff;
+    .custom-cursor.hovering
+    .cursor-ring {
 
-            box-shadow:
-                0 0 30px
-                rgba(124, 92, 255, 0.3);
+        width: 52px;
 
-        }
+        height: 52px;
 
+        border-color:
+            rgba(124, 92, 255, 0.95);
 
-        .custom-cursor.clicking
-        .cursor-ring {
+        background:
+            rgba(124, 92, 255, 0.08);
 
-            width:
-                24px;
+        box-shadow:
+            0 0 20px
+            rgba(124, 92, 255, 0.25);
 
-            height:
-                24px;
+    }
 
-            border-color:
-                white;
 
-        }
+    .custom-cursor.hovering
+    .cursor-dot {
 
+        width: 11px;
 
-        .custom-cursor.clicking
-        .cursor-dot {
+        height: 11px;
 
-            width:
-                13px;
+    }
 
-            height:
-                13px;
 
-            background:
-                white;
+    .custom-cursor.card-hover
+    .cursor-ring {
 
-        }
+        width: 65px;
 
+        height: 65px;
 
+        border-color:
+            #a89aff;
 
-        /* =====================================================
-           NAV
-        ===================================================== */
+        box-shadow:
+            0 0 30px
+            rgba(124, 92, 255, 0.3);
+
+    }
+
+
+    .custom-cursor.clicking
+    .cursor-ring {
+
+        width: 24px;
+
+        height: 24px;
+
+        border-color:
+            white;
+
+    }
+
+
+    .custom-cursor.clicking
+    .cursor-dot {
+
+        width: 13px;
+
+        height: 13px;
+
+        background:
+            white;
+
+    }
+
+
+
+    /* =====================================================
+       NAV
+    ===================================================== */
+
+    nav {
+
+        position: sticky;
+
+        top: 0;
+
+        width: 100%;
+
+        padding: 18px 7%;
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        background:
+            var(--nav-background);
+
+        backdrop-filter: blur(15px);
+
+        border-bottom:
+            1px solid
+            var(--border);
+
+        z-index: 1000;
+
+        transition: 0.5s;
+
+    }
+
+
+    .logo {
+
+        font-size: 24px;
+
+        font-weight: bold;
+
+        letter-spacing: 1px;
+
+    }
+
+
+    .logo span {
+
+        color:
+            var(--primary);
+
+    }
+
+
+    .menu {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 25px;
+
+    }
+
+
+    .menu a {
+
+        color:
+            var(--text-secondary);
+
+        font-size: 14px;
+
+        transition: 0.3s;
+
+        cursor: none !important;
+
+    }
+
+
+    .menu a:hover {
+
+        color:
+            var(--text);
+
+    }
+
+
+
+    /* =====================================================
+       SWITCH UIVERSE
+    ===================================================== */
+
+    .theme-switch {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        margin-left: 5px;
+
+        cursor: none !important;
+
+    }
+
+
+    .switch {
+
+        font-size: 17px;
+
+        position: relative;
+
+        display: inline-block;
+
+        width: 4em;
+
+        height: 2em;
+
+        cursor: none !important;
+
+    }
+
+
+    .switch input {
+
+        opacity: 0;
+
+        width: 0;
+
+        height: 0;
+
+        cursor: none !important;
+
+    }
+
+
+    .slider {
+
+        position: absolute;
+
+        inset: 0;
+
+        background-color: #03a9f4;
+
+        border-radius: 30px;
+
+        overflow: hidden;
+
+        transition: 0.4s;
+
+        box-shadow:
+            inset 0 0 5px
+            rgba(0,0,0,0.2);
+
+        cursor: none !important;
+
+    }
+
+
+    .slider:before {
+
+        position: absolute;
+
+        content: "";
+
+        height: 1.5em;
+
+        width: 1.5em;
+
+        left: 0.25em;
+
+        bottom: 0.25em;
+
+        border-radius: 50%;
+
+        background-color: #ffeb3b;
+
+        transition: 0.4s;
+
+        z-index: 5;
+
+        box-shadow:
+            0 0 8px
+            rgba(255, 235, 59, 0.7);
+
+    }
+
+
+    /* =====================================================
+       NUBES
+    ===================================================== */
+
+    .cloud {
+
+        position: absolute;
+
+        background:
+            #ffffff;
+
+        border-radius: 50%;
+
+        transition: 0.5s;
+
+        cursor: none !important;
+
+    }
+
+
+    .cloud-1 {
+
+        width: 1.1em;
+
+        height: 0.7em;
+
+        left: 0.7em;
+
+        bottom: 0.35em;
+
+    }
+
+
+    .cloud-2 {
+
+        width: 0.8em;
+
+        height: 0.6em;
+
+        left: 1.15em;
+
+        bottom: 0.65em;
+
+    }
+
+
+    .cloud-3 {
+
+        width: 0.7em;
+
+        height: 0.5em;
+
+        left: 0.35em;
+
+        bottom: 0.7em;
+
+    }
+
+
+
+    /* =====================================================
+       ESTRELLAS
+    ===================================================== */
+
+    .stars {
+
+        position: absolute;
+
+        inset: 0;
+
+        pointer-events: none !important;
+
+        opacity: 0;
+
+        transition: 0.5s;
+
+    }
+
+
+    .star {
+
+        position: absolute;
+
+        width: 4px;
+
+        height: 4px;
+
+        background:
+            white;
+
+        border-radius: 50%;
+
+        box-shadow:
+            0 0 4px white;
+
+    }
+
+
+    .star-1 {
+
+        top: 20%;
+
+        left: 18%;
+
+    }
+
+
+    .star-2 {
+
+        top: 65%;
+
+        left: 35%;
+
+    }
+
+
+    .star-3 {
+
+        top: 25%;
+
+        left: 68%;
+
+    }
+
+
+    .star-4 {
+
+        top: 70%;
+
+        left: 82%;
+
+    }
+
+
+
+    /* =====================================================
+       MODO OSCURO DEL SWITCH
+    ===================================================== */
+
+    input:checked + .slider {
+
+        background:
+            #17203a;
+
+    }
+
+
+    input:checked + .slider:before {
+
+        transform:
+            translateX(2em);
+
+        background:
+            #d8dcff;
+
+        box-shadow:
+            0 0 8px
+            rgba(180, 190, 255, 0.5);
+
+    }
+
+
+    input:checked
+    + .slider
+    .cloud {
+
+        opacity: 0;
+
+    }
+
+
+    input:checked
+    + .slider
+    .stars {
+
+        opacity: 1;
+
+    }
+
+
+
+    /* =====================================================
+       LUNA
+    ===================================================== */
+
+    .moon {
+
+        position: absolute;
+
+        width: 1.1em;
+
+        height: 1.1em;
+
+        right: 0.42em;
+
+        top: 0.42em;
+
+        border-radius: 50%;
+
+        background:
+            #d8dcff;
+
+        opacity: 0;
+
+        transition: 0.4s;
+
+        z-index: 2;
+
+    }
+
+
+    .moon:after {
+
+        content: "";
+
+        position: absolute;
+
+        width: 1.1em;
+
+        height: 1.1em;
+
+        border-radius: 50%;
+
+        background:
+            #17203a;
+
+        left: -0.28em;
+
+        top: -0.15em;
+
+    }
+
+
+    input:checked
+    + .slider
+    .moon {
+
+        opacity: 1;
+
+    }
+
+
+
+    /* =====================================================
+       BOTÓN HAMBURGUESA
+    ===================================================== */
+
+    .menu-button {
+
+        display: none;
+
+        width: 42px;
+
+        height: 42px;
+
+        border:
+            1px solid
+            var(--border);
+
+        border-radius: 10px;
+
+        background:
+            var(--surface);
+
+        position: relative;
+
+        cursor: none !important;
+
+    }
+
+
+    .menu-button span {
+
+        position: absolute;
+
+        width: 20px;
+
+        height: 2px;
+
+        background:
+            var(--text);
+
+        left: 50%;
+
+        transform:
+            translateX(-50%);
+
+        transition: 0.3s;
+
+        pointer-events: none;
+
+    }
+
+
+    .menu-button span:nth-child(1) {
+
+        top: 13px;
+
+    }
+
+
+    .menu-button span:nth-child(2) {
+
+        top: 20px;
+
+    }
+
+
+    .menu-button span:nth-child(3) {
+
+        top: 27px;
+
+    }
+
+
+    .menu-button.active
+    span:nth-child(1) {
+
+        top: 20px;
+
+        transform:
+            translateX(-50%)
+            rotate(45deg);
+
+    }
+
+
+    .menu-button.active
+    span:nth-child(2) {
+
+        opacity: 0;
+
+    }
+
+
+    .menu-button.active
+    span:nth-child(3) {
+
+        top: 20px;
+
+        transform:
+            translateX(-50%)
+            rotate(-45deg);
+
+    }
+
+
+
+    /* =====================================================
+       HERO
+    ===================================================== */
+
+    .hero {
+
+        min-height: 88vh;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        text-align: center;
+
+        padding: 80px 20px;
+
+        background:
+            radial-gradient(
+                circle at 50% 35%,
+                var(--hero-glow),
+                transparent 48%
+            ),
+            var(--background);
+
+        transition: 0.6s;
+
+    }
+
+
+    .hero-content {
+
+        max-width: 850px;
+
+    }
+
+
+    .badge {
+
+        display: inline-block;
+
+        padding: 7px 15px;
+
+        border:
+            1px solid
+            #40366b;
+
+        border-radius: 50px;
+
+        color:
+            #b9adff;
+
+        background:
+            rgba(124, 92, 255, 0.08);
+
+        font-size: 13px;
+
+        margin-bottom: 25px;
+
+        cursor: none !important;
+
+    }
+
+
+    h1 {
+
+        font-size:
+            clamp(60px, 14vw, 120px);
+
+        line-height: 0.9;
+
+        letter-spacing: -6px;
+
+        margin-bottom: 30px;
+
+    }
+
+
+    .gradient {
+
+        background:
+            linear-gradient(
+                90deg,
+                var(--text),
+                var(--primary-light)
+            );
+
+        -webkit-background-clip: text;
+
+        -webkit-text-fill-color: transparent;
+
+    }
+
+
+    .hero p {
+
+        max-width: 650px;
+
+        margin: auto;
+
+        color:
+            var(--text-secondary);
+
+        font-size: 18px;
+
+    }
+
+
+
+    /* =====================================================
+       BOTONES
+    ===================================================== */
+
+    .buttons {
+
+        margin-top: 35px;
+
+        display: flex;
+
+        justify-content: center;
+
+        gap: 15px;
+
+        flex-wrap: wrap;
+
+    }
+
+
+    .button {
+
+        padding: 14px 25px;
+
+        border-radius: 10px;
+
+        font-weight: bold;
+
+        transition: 0.3s;
+
+        cursor: none !important;
+
+    }
+
+
+    .primary {
+
+        background:
+            var(--primary);
+
+        color:
+            white;
+
+    }
+
+
+    .primary:hover {
+
+        transform:
+            translateY(-3px);
+
+        background:
+            var(--primary-light);
+
+    }
+
+
+    .secondary {
+
+        border:
+            1px solid
+            var(--border);
+
+        color:
+            var(--text-secondary);
+
+    }
+
+
+    .secondary:hover {
+
+        background:
+            var(--surface);
+
+        border-color:
+            var(--primary);
+
+    }
+
+
+
+    /* =====================================================
+       INTRO
+    ===================================================== */
+
+    .intro {
+
+        padding: 100px 7%;
+
+        text-align: center;
+
+    }
+
+
+    .intro-content {
+
+        max-width: 850px;
+
+        margin: auto;
+
+    }
+
+
+    .intro h2 {
+
+        font-size: 38px;
+
+        margin-bottom: 20px;
+
+    }
+
+
+    .intro h2 span {
+
+        color:
+            var(--primary);
+
+    }
+
+
+    .intro p {
+
+        color:
+            var(--text-secondary);
+
+        font-size: 17px;
+
+    }
+
+
+
+    /* =====================================================
+       TARJETAS
+    ===================================================== */
+
+    .features {
+
+        padding: 60px 7% 100px;
+
+    }
+
+
+    .features-title {
+
+        text-align: center;
+
+        font-size: 32px;
+
+        margin-bottom: 55px;
+
+    }
+
+
+    .cards {
+
+        max-width: 1100px;
+
+        margin: auto;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(
+                auto-fit,
+                minmax(220px, 1fr)
+            );
+
+        gap: 35px;
+
+    }
+
+
+    .card {
+
+        min-height: 254px;
+
+        padding: 30px;
+
+        border-radius: 30px;
+
+        background:
+            var(--card);
+
+        border:
+            1px solid
+            rgba(124, 92, 255, 0.15);
+
+        box-shadow:
+            15px 15px 30px
+            rgba(0, 0, 0, 0.35),
+
+            -10px -10px 25px
+            rgba(100, 100, 120, 0.08);
+
+        display: flex;
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        transition: 0.3s;
+
+        cursor: none !important;
+
+    }
+
+
+    .card:hover {
+
+        transform:
+            translateY(-8px);
+
+        border-color:
+            var(--primary);
+
+        box-shadow:
+            0 0 30px
+            rgba(124, 92, 255, 0.15);
+
+    }
+
+
+    .card h3 {
+
+        margin-bottom: 10px;
+
+        font-size: 20px;
+
+    }
+
+
+    .card p {
+
+        color:
+            var(--text-muted);
+
+        font-size: 14px;
+
+    }
+
+
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+
+    footer {
+
+        padding: 40px 20px;
+
+        text-align: center;
+
+        border-top:
+            1px solid
+            var(--border);
+
+        color:
+            var(--text-muted);
+
+        font-size: 13px;
+
+    }
+
+
+
+    /* =====================================================
+       CELULAR
+    ===================================================== */
+
+    @media (max-width: 700px) {
 
         nav {
 
-            position:
-                sticky;
-
-            top:
-                0;
-
-            width:
-                100%;
-
             padding:
-                18px 7%;
-
-            display:
-                flex;
-
-            justify-content:
-                space-between;
-
-            align-items:
-                center;
-
-            background:
-                var(--nav-background);
-
-            backdrop-filter:
-                blur(15px);
-
-            border-bottom:
-                1px solid
-                var(--border);
-
-            z-index:
-                1000;
-
-            transition:
-                0.5s;
-
-        }
-
-
-        .logo {
-
-            font-size:
-                24px;
-
-            font-weight:
-                bold;
-
-            letter-spacing:
-                1px;
-
-        }
-
-
-        .logo span {
-
-            color:
-                var(--primary);
+                14px 5%;
 
         }
 
 
         .menu {
 
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            gap:
-                25px;
-
-        }
-
-
-        .menu a {
-
-            color:
-                var(--text-secondary);
-
-            font-size:
-                14px;
-
-            transition:
-                0.3s;
-
-        }
-
-
-        .menu a:hover {
-
-            color:
-                var(--text);
-
-        }
-
-
-
-        /* =====================================================
-           SWITCH UIVERSE
-        ===================================================== */
-
-        .theme-switch {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            margin-left:
-                5px;
-
-        }
-
-
-        .switch {
-
-            font-size:
-                17px;
-
-            position:
-                relative;
-
-            display:
-                inline-block;
-
-            width:
-                4em;
-
-            height:
-                2em;
-
-        }
-
-
-        .switch input {
-
-            opacity:
-                0;
-
-            width:
-                0;
-
-            height:
-                0;
-
-        }
-
-
-        .slider {
-
             position:
                 absolute;
 
-            inset:
+            top:
+                100%;
+
+            left:
                 0;
 
-            background-color:
-                #03a9f4;
-
-            border-radius:
-                30px;
-
-            overflow:
-                hidden;
-
-            transition:
-                0.4s;
-
-            box-shadow:
-                inset 0 0 5px
-                rgba(0,0,0,0.2);
-
-        }
-
-
-        .slider:before {
-
-            position:
-                absolute;
-
-            content:
-                "";
-
-            height:
-                1.5em;
-
             width:
-                1.5em;
-
-            left:
-                0.25em;
-
-            bottom:
-                0.25em;
-
-            border-radius:
-                50%;
-
-            background-color:
-                #ffeb3b;
-
-            transition:
-                0.4s;
-
-            z-index:
-                5;
-
-            box-shadow:
-                0 0 8px
-                rgba(255, 235, 59, 0.7);
-
-        }
-
-
-        /* =====================================================
-           NUBES
-        ===================================================== */
-
-        .cloud {
-
-            position:
-                absolute;
-
-            background:
-                #ffffff;
-
-            border-radius:
-                50%;
-
-            transition:
-                0.5s;
-
-        }
-
-
-        .cloud-1 {
-
-            width:
-                1.1em;
-
-            height:
-                0.7em;
-
-            left:
-                0.7em;
-
-            bottom:
-                0.35em;
-
-        }
-
-
-        .cloud-2 {
-
-            width:
-                0.8em;
-
-            height:
-                0.6em;
-
-            left:
-                1.15em;
-
-            bottom:
-                0.65em;
-
-        }
-
-
-        .cloud-3 {
-
-            width:
-                0.7em;
-
-            height:
-                0.5em;
-
-            left:
-                0.35em;
-
-            bottom:
-                0.7em;
-
-        }
-
-
-        /* =====================================================
-           ESTRELLAS
-        ===================================================== */
-
-        .stars {
-
-            position:
-                absolute;
-
-            inset:
-                0;
-
-            pointer-events:
-                none;
-
-            opacity:
-                0;
-
-            transition:
-                0.5s;
-
-        }
-
-
-        .star {
-
-            position:
-                absolute;
-
-            width:
-                4px;
-
-            height:
-                4px;
-
-            background:
-                white;
-
-            border-radius:
-                50%;
-
-            box-shadow:
-                0 0 4px white;
-
-        }
-
-
-        .star-1 {
-
-            top:
-                20%;
-
-            left:
-                18%;
-
-        }
-
-
-        .star-2 {
-
-            top:
-                65%;
-
-            left:
-                35%;
-
-        }
-
-
-        .star-3 {
-
-            top:
-                25%;
-
-            left:
-                68%;
-
-        }
-
-
-        .star-4 {
-
-            top:
-                70%;
-
-            left:
-                82%;
-
-        }
-
-
-        /* =====================================================
-           MODO OSCURO DEL SWITCH
-        ===================================================== */
-
-        input:checked + .slider {
-
-            background:
-                #17203a;
-
-        }
-
-
-        input:checked + .slider:before {
-
-            transform:
-                translateX(2em);
-
-            background:
-                #d8dcff;
-
-            box-shadow:
-                0 0 8px
-                rgba(180, 190, 255, 0.5);
-
-        }
-
-
-        input:checked
-        + .slider
-        .cloud {
-
-            opacity:
-                0;
-
-        }
-
-
-        input:checked
-        + .slider
-        .stars {
-
-            opacity:
-                1;
-
-        }
-
-
-
-        /* =====================================================
-           LUNA
-        ===================================================== */
-
-        .moon {
-
-            position:
-                absolute;
-
-            width:
-                1.1em;
-
-            height:
-                1.1em;
-
-            right:
-                0.42em;
-
-            top:
-                0.42em;
-
-            border-radius:
-                50%;
-
-            background:
-                #d8dcff;
-
-            opacity:
-                0;
-
-            transition:
-                0.4s;
-
-            z-index:
-                2;
-
-        }
-
-
-        .moon:after {
-
-            content:
-                "";
-
-            position:
-                absolute;
-
-            width:
-                1.1em;
-
-            height:
-                1.1em;
-
-            border-radius:
-                50%;
-
-            background:
-                #17203a;
-
-            left:
-                -0.28em;
-
-            top:
-                -0.15em;
-
-        }
-
-
-        input:checked
-        + .slider
-        .moon {
-
-            opacity:
-                1;
-
-        }
-
-
-
-        /* =====================================================
-           BOTÓN HAMBURGUESA
-        ===================================================== */
-
-        .menu-button {
-
-            display:
-                none;
-
-            width:
-                42px;
-
-            height:
-                42px;
-
-            border:
-                1px solid
-                var(--border);
-
-            border-radius:
-                10px;
-
-            background:
-                var(--surface);
-
-            position:
-                relative;
-
-        }
-
-
-        .menu-button span {
-
-            position:
-                absolute;
-
-            width:
-                20px;
-
-            height:
-                2px;
-
-            background:
-                var(--text);
-
-            left:
-                50%;
-
-            transform:
-                translateX(-50%);
-
-            transition:
-                0.3s;
-
-        }
-
-
-        .menu-button span:nth-child(1) {
-
-            top:
-                13px;
-
-        }
-
-
-        .menu-button span:nth-child(2) {
-
-            top:
-                20px;
-
-        }
-
-
-        .menu-button span:nth-child(3) {
-
-            top:
-                27px;
-
-        }
-
-
-        .menu-button.active
-        span:nth-child(1) {
-
-            top:
-                20px;
-
-            transform:
-                translateX(-50%)
-                rotate(45deg);
-
-        }
-
-
-        .menu-button.active
-        span:nth-child(2) {
-
-            opacity:
-                0;
-
-        }
-
-
-        .menu-button.active
-        span:nth-child(3) {
-
-            top:
-                20px;
-
-            transform:
-                translateX(-50%)
-                rotate(-45deg);
-
-        }
-
-
-
-        /* =====================================================
-           HERO
-        ===================================================== */
-
-        .hero {
-
-            min-height:
-                88vh;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            text-align:
-                center;
-
-            padding:
-                80px 20px;
-
-            background:
-
-                radial-gradient(
-
-                    circle at 50% 35%,
-
-                    var(--hero-glow),
-
-                    transparent 48%
-
-                ),
-
-                var(--background);
-
-            transition:
-                0.6s;
-
-        }
-
-
-        .hero-content {
-
-            max-width:
-                850px;
-
-        }
-
-
-        .badge {
-
-            display:
-                inline-block;
-
-            padding:
-                7px 15px;
-
-            border:
-                1px solid
-                #40366b;
-
-            border-radius:
-                50px;
-
-            color:
-                #b9adff;
-
-            background:
-                rgba(124, 92, 255, 0.08);
-
-            font-size:
-                13px;
-
-            margin-bottom:
-                25px;
-
-        }
-
-
-        h1 {
-
-            font-size:
-                clamp(60px, 14vw, 120px);
-
-            line-height:
-                0.9;
-
-            letter-spacing:
-                -6px;
-
-            margin-bottom:
-                30px;
-
-        }
-
-
-        .gradient {
-
-            background:
-
-                linear-gradient(
-
-                    90deg,
-
-                    var(--text),
-
-                    var(--primary-light)
-
-                );
-
-            -webkit-background-clip:
-                text;
-
-            -webkit-text-fill-color:
-                transparent;
-
-        }
-
-
-        .hero p {
-
-            max-width:
-                650px;
-
-            margin:
-                auto;
-
-            color:
-                var(--text-secondary);
-
-            font-size:
-                18px;
-
-        }
-
-
-
-        /* =====================================================
-           BOTONES
-        ===================================================== */
-
-        .buttons {
-
-            margin-top:
-                35px;
-
-            display:
-                flex;
-
-            justify-content:
-                center;
-
-            gap:
-                15px;
-
-            flex-wrap:
-                wrap;
-
-        }
-
-
-        .button {
-
-            padding:
-                14px 25px;
-
-            border-radius:
-                10px;
-
-            font-weight:
-                bold;
-
-            transition:
-                0.3s;
-
-        }
-
-
-        .primary {
-
-            background:
-                var(--primary);
-
-            color:
-                white;
-
-        }
-
-
-        .primary:hover {
-
-            transform:
-                translateY(-3px);
-
-            background:
-                var(--primary-light);
-
-        }
-
-
-        .secondary {
-
-            border:
-                1px solid
-                var(--border);
-
-            color:
-                var(--text-secondary);
-
-        }
-
-
-        .secondary:hover {
-
-            background:
-                var(--surface);
-
-            border-color:
-                var(--primary);
-
-        }
-
-
-
-        /* =====================================================
-           INTRO
-        ===================================================== */
-
-        .intro {
-
-            padding:
-                100px 7%;
-
-            text-align:
-                center;
-
-        }
-
-
-        .intro-content {
-
-            max-width:
-                850px;
-
-            margin:
-                auto;
-
-        }
-
-
-        .intro h2 {
-
-            font-size:
-                38px;
-
-            margin-bottom:
-                20px;
-
-        }
-
-
-        .intro h2 span {
-
-            color:
-                var(--primary);
-
-        }
-
-
-        .intro p {
-
-            color:
-                var(--text-secondary);
-
-            font-size:
-                17px;
-
-        }
-
-
-
-        /* =====================================================
-           TARJETAS
-        ===================================================== */
-
-        .features {
-
-            padding:
-                60px 7% 100px;
-
-        }
-
-
-        .features-title {
-
-            text-align:
-                center;
-
-            font-size:
-                32px;
-
-            margin-bottom:
-                55px;
-
-        }
-
-
-        .cards {
-
-            max-width:
-                1100px;
-
-            margin:
-                auto;
-
-            display:
-                grid;
-
-            grid-template-columns:
-                repeat(
-                    auto-fit,
-                    minmax(220px, 1fr)
-                );
-
-            gap:
-                35px;
-
-        }
-
-
-        .card {
-
-            min-height:
-                254px;
-
-            padding:
-                30px;
-
-            border-radius:
-                30px;
-
-            background:
-                var(--card);
-
-            border:
-                1px solid
-                rgba(124, 92, 255, 0.15);
-
-            box-shadow:
-
-                15px 15px 30px
-                rgba(0, 0, 0, 0.35),
-
-                -10px -10px 25px
-                rgba(100, 100, 120, 0.08);
+                100%;
 
             display:
                 flex;
@@ -1314,984 +1278,928 @@
             flex-direction:
                 column;
 
-            justify-content:
-                center;
+            gap:
+                0;
+
+            background:
+                var(--nav-background);
+
+            border-bottom:
+                1px solid
+                var(--border);
+
+            overflow:
+                hidden;
+
+            max-height:
+                0;
+
+            opacity:
+                0;
 
             transition:
-                0.3s;
+                0.35s;
 
         }
 
 
-        .card:hover {
+        .menu.active {
 
-            transform:
-                translateY(-8px);
+            max-height:
+                500px;
 
-            border-color:
-                var(--primary);
-
-            box-shadow:
-
-                0 0 30px
-                rgba(124, 92, 255, 0.15);
+            opacity:
+                1;
 
         }
 
 
-        .card h3 {
+        .menu a {
 
-            margin-bottom:
-                10px;
-
-            font-size:
-                20px;
-
-        }
-
-
-        .card p {
-
-            color:
-                var(--text-muted);
-
-            font-size:
-                14px;
-
-        }
-
-
-
-        /* =====================================================
-           FOOTER
-        ===================================================== */
-
-        footer {
+            width:
+                100%;
 
             padding:
-                40px 20px;
+                17px 25px;
+
+            font-size:
+                15px;
+
+            border-bottom:
+                1px solid
+                var(--border);
+
+            cursor:
+                none !important;
+
+        }
+
+
+        .theme-switch {
+
+            width:
+                100%;
+
+            padding:
+                15px 25px;
+
+            justify-content:
+                flex-start;
+
+            border-bottom:
+                1px solid
+                var(--border);
+
+            cursor:
+                none !important;
+
+        }
+
+
+        .menu-button {
+
+            display:
+                block;
+
+            cursor:
+                none !important;
+
+        }
+
+
+        h1 {
+
+            font-size:
+                clamp(55px, 18vw, 90px);
+
+            letter-spacing:
+                -4px;
+
+        }
+
+
+        .hero {
+
+            min-height:
+                85vh;
+
+            padding:
+                60px 20px;
+
+        }
+
+
+        .hero p {
+
+            font-size:
+                16px;
+
+        }
+
+
+        .buttons {
+
+            flex-direction:
+                column;
+
+            align-items:
+                stretch;
+
+            max-width:
+                300px;
+
+            margin-left:
+                auto;
+
+            margin-right:
+                auto;
+
+        }
+
+
+        .button {
 
             text-align:
                 center;
 
-            border-top:
-                1px solid
-                var(--border);
+            cursor:
+                none !important;
 
-            color:
-                var(--text-muted);
+        }
+
+
+        .intro {
+
+            padding:
+                80px 7%;
+
+        }
+
+
+        .intro h2 {
 
             font-size:
-                13px;
+                30px;
 
         }
 
 
+        .features {
 
-        /* =====================================================
-           CELULAR
-        ===================================================== */
-
-        @media (max-width: 700px) {
-
-            nav {
-
-                padding:
-                    14px 5%;
-
-            }
-
-
-            .menu {
-
-                position:
-                    absolute;
-
-                top:
-                    100%;
-
-                left:
-                    0;
-
-                width:
-                    100%;
-
-                display:
-                    flex;
-
-                flex-direction:
-                    column;
-
-                gap:
-                    0;
-
-                background:
-                    var(--nav-background);
-
-                border-bottom:
-                    1px solid
-                    var(--border);
-
-                overflow:
-                    hidden;
-
-                max-height:
-                    0;
-
-                opacity:
-                    0;
-
-                transition:
-                    0.35s;
-
-            }
-
-
-            .menu.active {
-
-                max-height:
-                    500px;
-
-                opacity:
-                    1;
-
-            }
-
-
-            .menu a {
-
-                width:
-                    100%;
-
-                padding:
-                    17px 25px;
-
-                font-size:
-                    15px;
-
-                border-bottom:
-                    1px solid
-                    var(--border);
-
-            }
-
-
-            .theme-switch {
-
-                width:
-                    100%;
-
-                padding:
-                    15px 25px;
-
-                justify-content:
-                    flex-start;
-
-                border-bottom:
-                    1px solid
-                    var(--border);
-
-            }
-
-
-            .menu-button {
-
-                display:
-                    block;
-
-            }
-
-
-            h1 {
-
-                font-size:
-                    clamp(55px, 18vw, 90px);
-
-                letter-spacing:
-                    -4px;
-
-            }
-
-
-            .hero {
-
-                min-height:
-                    85vh;
-
-                padding:
-                    60px 20px;
-
-            }
-
-
-            .hero p {
-
-                font-size:
-                    16px;
-
-            }
-
-
-            .buttons {
-
-                flex-direction:
-                    column;
-
-                align-items:
-                    stretch;
-
-                max-width:
-                    300px;
-
-                margin-left:
-                    auto;
-
-                margin-right:
-                    auto;
-
-            }
-
-
-            .button {
-
-                text-align:
-                    center;
-
-            }
-
-
-            .intro {
-
-                padding:
-                    80px 7%;
-
-            }
-
-
-            .intro h2 {
-
-                font-size:
-                    30px;
-
-            }
-
-
-            .features {
-
-                padding:
-                    40px 7% 80px;
-
-            }
-
-
-            .cards {
-
-                gap:
-                    25px;
-
-            }
-
-
-            .card {
-
-                min-height:
-                    230px;
-
-                padding:
-                    25px;
-
-            }
+            padding:
+                40px 7% 80px;
 
         }
 
-    </style>
+
+        .cards {
+
+            gap:
+                25px;
+
+        }
+
+
+        .card {
+
+            min-height:
+                230px;
+
+            padding:
+                25px;
+
+            cursor:
+                none !important;
+
+        }
+
+    }
+
+</style>
+```
 
 </head>
 
-
 <body>
 
+```
+<!-- =====================================================
+     CURSOR
+===================================================== -->
 
-    <!-- =====================================================
-         CURSOR
-    ===================================================== -->
+<div
+    class="custom-cursor"
+    id="customCursor"
+    aria-hidden="true"
+>
 
-    <div
-        class="custom-cursor"
-        id="customCursor"
-    >
+    <div class="cursor-ring"></div>
 
-        <div class="cursor-ring"></div>
+    <div class="cursor-dot"></div>
 
-        <div class="cursor-dot"></div>
+</div>
+
+
+
+<!-- =====================================================
+     MENÚ
+===================================================== -->
+
+<nav>
+
+    <div class="logo">
+
+        <span>Air</span>Mouse
 
     </div>
 
 
+    <div
+        class="menu"
+        id="menu"
+    >
 
-    <!-- =====================================================
-         MENÚ
-    ===================================================== -->
+        <a href="index.html">
+            Inicio
+        </a>
 
-    <nav>
+        <a href="proyecto.html">
+            Proyecto
+        </a>
 
-        <div class="logo">
+        <a href="funcionamiento.html">
+            Funcionamiento
+        </a>
 
-            <span>Air</span>Mouse
+        <a href="software.html">
+            Software
+        </a>
 
-        </div>
-
-
-        <div
-            class="menu"
-            id="menu"
-        >
-
-            <a href="index.html">
-                Inicio
-            </a>
-
-            <a href="proyecto.html">
-                Proyecto
-            </a>
-
-            <a href="funcionamiento.html">
-                Funcionamiento
-            </a>
-
-            <a href="software.html">
-                Software
-            </a>
-
-            <a href="compatibilidad.html">
-                Compatibilidad
-            </a>
+        <a href="compatibilidad.html">
+            Compatibilidad
+        </a>
 
 
-            <!-- SWITCH -->
+        <!-- SWITCH -->
 
-            <div class="theme-switch">
+        <div class="theme-switch">
 
-                <label class="switch">
+            <label class="switch">
 
-                    <input
-                        id="themeInput"
-                        type="checkbox"
-                    >
+                <input
+                    id="themeInput"
+                    type="checkbox"
+                >
 
+                <div class="slider round">
 
-                    <div class="slider round">
+                    <!-- NUBES -->
 
+                    <div class="cloud cloud-1"></div>
 
-                        <!-- NUBES -->
+                    <div class="cloud cloud-2"></div>
 
-                        <div class="cloud cloud-1"></div>
-
-                        <div class="cloud cloud-2"></div>
-
-                        <div class="cloud cloud-3"></div>
+                    <div class="cloud cloud-3"></div>
 
 
-                        <!-- LUNA -->
+                    <!-- LUNA -->
 
-                        <div class="moon"></div>
+                    <div class="moon"></div>
 
 
-                        <!-- ESTRELLAS -->
+                    <!-- ESTRELLAS -->
 
-                        <div class="stars">
+                    <div class="stars">
 
-                            <div class="star star-1"></div>
+                        <div class="star star-1"></div>
 
-                            <div class="star star-2"></div>
+                        <div class="star star-2"></div>
 
-                            <div class="star star-3"></div>
+                        <div class="star star-3"></div>
 
-                            <div class="star star-4"></div>
-
-                        </div>
+                        <div class="star star-4"></div>
 
                     </div>
 
-                </label>
+                </div>
 
-            </div>
+            </label>
+
+        </div>
+
+    </div>
+
+
+    <!-- HAMBURGUESA -->
+
+    <button
+        class="menu-button"
+        id="menuButton"
+        aria-label="Abrir menú"
+        type="button"
+    >
+
+        <span></span>
+
+        <span></span>
+
+        <span></span>
+
+    </button>
+
+</nav>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<header class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+
+            Ratón aéreo inalámbrico
 
         </div>
 
 
-        <!-- HAMBURGUESA -->
+        <h1>
 
-        <button
-            class="menu-button"
-            id="menuButton"
-            aria-label="Abrir menú"
-        >
+            <span class="gradient">
 
-            <span></span>
+                AirMouse
 
-            <span></span>
+            </span>
 
-            <span></span>
-
-        </button>
-
-    </nav>
+        </h1>
 
 
+        <p>
 
-    <!-- =====================================================
-         HERO
-    ===================================================== -->
+            Una nueva forma de interactuar con tus dispositivos.
 
-    <header class="hero">
+            Controlá el cursor mediante movimientos naturales
+            utilizando tecnología inercial y comunicación inalámbrica.
 
-        <div class="hero-content">
-
-            <div class="badge">
-
-                Ratón aéreo inalámbrico
-
-            </div>
+        </p>
 
 
-            <h1>
+        <div class="buttons">
 
-                <span class="gradient">
+            <a
+                href="software.html"
+                class="button primary"
+            >
 
-                    AirMouse
+                Descargar software
 
-                </span>
-
-            </h1>
-
-
-            <p>
-
-                Una nueva forma de interactuar con tus dispositivos.
-
-                Controlá el cursor mediante movimientos naturales
-                utilizando tecnología inercial y comunicación inalámbrica.
-
-            </p>
+            </a>
 
 
-            <div class="buttons">
+            <a
+                href="proyecto.html"
+                class="button secondary"
+            >
 
-                <a
-                    href="software.html"
-                    class="button primary"
-                >
+                Conocer el proyecto
 
-                    Descargar software
-
-                </a>
-
-
-                <a
-                    href="proyecto.html"
-                    class="button secondary"
-                >
-
-                    Conocer el proyecto
-
-                </a>
-
-            </div>
+            </a>
 
         </div>
 
-    </header>
+    </div>
+
+</header>
 
 
 
-    <!-- =====================================================
-         INTRO
-    ===================================================== -->
+<!-- =====================================================
+     INTRO
+===================================================== -->
 
-    <section class="intro">
+<section class="intro">
 
-        <div class="intro-content">
+    <div class="intro-content">
 
-            <h2>
+        <h2>
 
-                Tecnología que se adapta a
-                <span>vos.</span>
-
-            </h2>
-
-
-            <p>
-
-                AirMouse combina sensores inerciales,
-                sistemas embebidos y comunicación Bluetooth
-                para crear una forma alternativa de interacción.
-
-            </p>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         CARACTERÍSTICAS
-    ===================================================== -->
-
-    <section class="features">
-
-        <h2 class="features-title">
-
-            ¿Por qué AirMouse?
+            Tecnología que se adapta a
+            <span>vos.</span>
 
         </h2>
 
 
-        <div class="cards">
+        <p>
+
+            AirMouse combina sensores inerciales,
+            sistemas embebidos y comunicación Bluetooth
+            para crear una forma alternativa de interacción.
+
+        </p>
+
+    </div>
+
+</section>
 
 
-            <div class="card">
 
-                <h3>
-                    Precisión
-                </h3>
+<!-- =====================================================
+     CARACTERÍSTICAS
+===================================================== -->
 
-                <p>
+<section class="features">
 
-                    Detección de movimientos mediante
-                    sensores inerciales.
+    <h2 class="features-title">
 
-                </p>
+        ¿Por qué AirMouse?
 
-            </div>
+    </h2>
 
 
-            <div class="card">
+    <div class="cards">
 
-                <h3>
-                    Inalámbrico
-                </h3>
+        <div class="card">
 
-                <p>
+            <h3>
+                Precisión
+            </h3>
 
-                    Comunicación Bluetooth sin necesidad
-                    de cables.
+            <p>
 
-                </p>
+                Detección de movimientos mediante
+                sensores inerciales.
 
-            </div>
-
-
-            <div class="card">
-
-                <h3>
-                    Personalizable
-                </h3>
-
-                <p>
-
-                    Configuraciones adaptables a diferentes
-                    usuarios y preferencias.
-
-                </p>
-
-            </div>
-
-
-            <div class="card">
-
-                <h3>
-                    Accesibilidad
-                </h3>
-
-                <p>
-
-                    Una alternativa de interacción con
-                    baja exigencia motriz.
-
-                </p>
-
-            </div>
-
+            </p>
 
         </div>
 
-    </section>
+
+        <div class="card">
+
+            <h3>
+                Inalámbrico
+            </h3>
+
+            <p>
+
+                Comunicación Bluetooth sin necesidad
+                de cables.
+
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                Personalizable
+            </h3>
+
+            <p>
+
+                Configuraciones adaptables a diferentes
+                usuarios y preferencias.
+
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                Accesibilidad
+            </h3>
+
+            <p>
+
+                Una alternativa de interacción con
+                baja exigencia motriz.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
 
 
 
-    <!-- =====================================================
-         FOOTER
-    ===================================================== -->
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
-    <footer>
+<footer>
 
-        <p>
-            © 2026 AirMouse Project
-        </p>
+    <p>
+        © 2026 AirMouse Project
+    </p>
 
-        <p>
+    <p>
 
-            Ratón Aéreo Inalámbrico Basado en Sistemas
-            Embebidos e Interfaces Inerciales
+        Ratón Aéreo Inalámbrico Basado en Sistemas
+        Embebidos e Interfaces Inerciales
 
-        </p>
+    </p>
 
-    </footer>
-
-
-
-    <!-- =====================================================
-         JAVASCRIPT
-    ===================================================== -->
-
-    <script>
+</footer>
 
 
-        /* =====================================================
-           MENÚ HAMBURGUESA
-        ===================================================== */
 
-        const menuButton =
-            document.getElementById(
-                "menuButton"
-            );
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
 
 
-        const menu =
-            document.getElementById(
-                "menu"
-            );
+    /* =====================================================
+       MENÚ HAMBURGUESA
+    ===================================================== */
 
-
-        menuButton.addEventListener(
-            "click",
-            function () {
-
-                menu.classList.toggle(
-                    "active"
-                );
-
-                menuButton.classList.toggle(
-                    "active"
-                );
-
-            }
+    const menuButton =
+        document.getElementById(
+            "menuButton"
         );
 
 
-        /* Cerrar menú */
+    const menu =
+        document.getElementById(
+            "menu"
+        );
 
-        const menuLinks =
-            document.querySelectorAll(
-                ".menu a"
+
+    menuButton.addEventListener(
+        "click",
+        function () {
+
+            menu.classList.toggle(
+                "active"
             );
 
-
-        menuLinks.forEach(
-            function (link) {
-
-                link.addEventListener(
-                    "click",
-                    function () {
-
-                        menu.classList.remove(
-                            "active"
-                        );
-
-                        menuButton.classList.remove(
-                            "active"
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-
-
-        /* =====================================================
-           CURSOR PERSONALIZADO
-        ===================================================== */
-
-        const customCursor =
-            document.getElementById(
-                "customCursor"
-            );
-
-
-        let mouseX = 0;
-        let mouseY = 0;
-
-        let cursorX = 0;
-        let cursorY = 0;
-
-
-        document.addEventListener(
-            "mousemove",
-            function (event) {
-
-                mouseX =
-                    event.clientX;
-
-                mouseY =
-                    event.clientY;
-
-                customCursor.style.opacity =
-                    "1";
-
-            }
-        );
-
-
-        document.addEventListener(
-            "mouseleave",
-            function () {
-
-                customCursor.style.opacity =
-                    "0";
-
-            }
-        );
-
-
-        function animateCursor() {
-
-            cursorX +=
-                (mouseX - cursorX)
-                * 0.18;
-
-
-            cursorY +=
-                (mouseY - cursorY)
-                * 0.18;
-
-
-            customCursor.style.transform =
-                `translate(${cursorX}px, ${cursorY}px)`;
-
-
-            requestAnimationFrame(
-                animateCursor
+            menuButton.classList.toggle(
+                "active"
             );
 
         }
+    );
 
 
-        animateCursor();
+    /* Cerrar menú */
+
+    const menuLinks =
+        document.querySelectorAll(
+            ".menu a"
+        );
+
+
+    menuLinks.forEach(
+        function (link) {
+
+            link.addEventListener(
+                "click",
+                function () {
+
+                    menu.classList.remove(
+                        "active"
+                    );
+
+                    menuButton.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
+
+        }
+    );
 
 
 
-        /* =====================================================
-           CURSOR SOBRE ELEMENTOS
-        ===================================================== */
+    /* =====================================================
+       CURSOR PERSONALIZADO
+    ===================================================== */
 
-        const interactiveElements =
-            document.querySelectorAll(
-                "a, button, .switch, .badge"
+    const customCursor =
+        document.getElementById(
+            "customCursor"
+        );
+
+
+    let mouseX = 0;
+    let mouseY = 0;
+
+    let cursorX = 0;
+    let cursorY = 0;
+
+
+    /*
+     * Muestra y mueve el cursor personalizado.
+     */
+
+    document.addEventListener(
+        "mousemove",
+        function (event) {
+
+            mouseX =
+                event.clientX;
+
+            mouseY =
+                event.clientY;
+
+            customCursor.style.opacity =
+                "1";
+
+        }
+    );
+
+
+    /*
+     * Oculta el cursor personalizado
+     * cuando el mouse abandona la página.
+     */
+
+    document.addEventListener(
+        "mouseleave",
+        function () {
+
+            customCursor.style.opacity =
+                "0";
+
+        }
+    );
+
+
+    /*
+     * Animación suave del cursor.
+     */
+
+    function animateCursor() {
+
+        cursorX +=
+            (mouseX - cursorX)
+            * 0.18;
+
+
+        cursorY +=
+            (mouseY - cursorY)
+            * 0.18;
+
+
+        customCursor.style.transform =
+            `translate3d(${cursorX}px, ${cursorY}px, 0)`;
+
+
+        requestAnimationFrame(
+            animateCursor
+        );
+
+    }
+
+
+    animateCursor();
+
+
+
+    /* =====================================================
+       CURSOR SOBRE ELEMENTOS
+    ===================================================== */
+
+    const interactiveElements =
+        document.querySelectorAll(
+            "a, button, .switch, .badge, input, label"
+        );
+
+
+    interactiveElements.forEach(
+        function (element) {
+
+            element.addEventListener(
+                "mouseenter",
+                function () {
+
+                    customCursor.classList.add(
+                        "hovering"
+                    );
+
+                }
             );
 
 
-        interactiveElements.forEach(
-            function (element) {
+            element.addEventListener(
+                "mouseleave",
+                function () {
 
-                element.addEventListener(
-                    "mouseenter",
-                    function () {
+                    customCursor.classList.remove(
+                        "hovering"
+                    );
 
-                        customCursor.classList.add(
-                            "hovering"
-                        );
+                }
+            );
 
-                    }
-                );
+        }
+    );
 
 
-                element.addEventListener(
-                    "mouseleave",
-                    function () {
 
-                        customCursor.classList.remove(
-                            "hovering"
-                        );
+    /* =====================================================
+       CURSOR SOBRE TARJETAS
+    ===================================================== */
 
-                    }
-                );
-
-            }
+    const cards =
+        document.querySelectorAll(
+            ".card"
         );
 
 
-        /* Cursor sobre tarjetas */
+    cards.forEach(
+        function (card) {
 
-        const cards =
-            document.querySelectorAll(
-                ".card"
+            card.addEventListener(
+                "mouseenter",
+                function () {
+
+                    customCursor.classList.add(
+                        "hovering"
+                    );
+
+                    customCursor.classList.add(
+                        "card-hover"
+                    );
+
+                }
             );
 
 
-        cards.forEach(
-            function (card) {
+            card.addEventListener(
+                "mouseleave",
+                function () {
 
-                card.addEventListener(
-                    "mouseenter",
-                    function () {
+                    customCursor.classList.remove(
+                        "hovering"
+                    );
 
-                        customCursor.classList.add(
-                            "hovering"
-                        );
+                    customCursor.classList.remove(
+                        "card-hover"
+                    );
 
-                        customCursor.classList.add(
-                            "card-hover"
-                        );
+                }
+            );
 
-                    }
-                );
-
-
-                card.addEventListener(
-                    "mouseleave",
-                    function () {
-
-                        customCursor.classList.remove(
-                            "hovering"
-                        );
-
-                        customCursor.classList.remove(
-                            "card-hover"
-                        );
-
-                    }
-                );
-
-            }
-        );
+        }
+    );
 
 
-        /* Click */
 
-        document.addEventListener(
-            "mousedown",
-            function () {
+    /* =====================================================
+       CLICK
+    ===================================================== */
 
-                customCursor.classList.add(
-                    "clicking"
-                );
+    document.addEventListener(
+        "mousedown",
+        function () {
 
-            }
-        );
+            customCursor.classList.add(
+                "clicking"
+            );
+
+        }
+    );
 
 
-        document.addEventListener(
-            "mouseup",
-            function () {
+    document.addEventListener(
+        "mouseup",
+        function () {
+
+            customCursor.classList.remove(
+                "clicking"
+            );
+
+        }
+    );
+
+
+    /*
+     * Si el mouse sale de la ventana mientras
+     * se está haciendo click, quitamos el estado.
+     */
+
+    document.addEventListener(
+        "mouseout",
+        function (event) {
+
+            if (!event.relatedTarget) {
 
                 customCursor.classList.remove(
                     "clicking"
                 );
 
             }
-        );
-
-
-
-        /* =====================================================
-           TEMA CLARO / OSCURO
-        ===================================================== */
-
-        const themeInput =
-            document.getElementById(
-                "themeInput"
-            );
-
-
-        const savedTheme =
-            localStorage.getItem(
-                "airmouse-theme"
-            );
-
-
-        /*
-            Si había un tema guardado,
-            lo recuperamos.
-        */
-
-        if (savedTheme === "light") {
-
-            document.body.classList.add(
-                "light-mode"
-            );
-
-            themeInput.checked =
-                false;
-
-        } else {
-
-            /*
-                Oscuro por defecto.
-            */
-
-            document.body.classList.remove(
-                "light-mode"
-            );
-
-            themeInput.checked =
-                true;
 
         }
+    );
 
 
 
-        /* =====================================================
-           CAMBIAR TEMA
-        ===================================================== */
+    /* =====================================================
+       TEMA CLARO / OSCURO
+    ===================================================== */
 
-        themeInput.addEventListener(
-            "change",
-            function () {
-
-
-                if (themeInput.checked) {
-
-                    /*
-                        MODO OSCURO
-                    */
-
-                    document.body.classList.remove(
-                        "light-mode"
-                    );
-
-                    localStorage.setItem(
-                        "airmouse-theme",
-                        "dark"
-                    );
-
-
-                } else {
-
-                    /*
-                        MODO CLARO
-                    */
-
-                    document.body.classList.add(
-                        "light-mode"
-                    );
-
-                    localStorage.setItem(
-                        "airmouse-theme",
-                        "light"
-                    );
-
-                }
-
-            }
+    const themeInput =
+        document.getElementById(
+            "themeInput"
         );
 
 
-    </script>
+    const savedTheme =
+        localStorage.getItem(
+            "airmouse-theme"
+        );
 
+
+    /*
+     * Si había un tema guardado,
+     * lo recuperamos.
+     */
+
+    if (savedTheme === "light") {
+
+        document.body.classList.add(
+            "light-mode"
+        );
+
+        themeInput.checked =
+            false;
+
+    } else {
+
+        /*
+         * Oscuro por defecto.
+         */
+
+        document.body.classList.remove(
+            "light-mode"
+        );
+
+        themeInput.checked =
+            true;
+
+    }
+
+
+
+    /* =====================================================
+       CAMBIAR TEMA
+    ===================================================== */
+
+    themeInput.addEventListener(
+        "change",
+        function () {
+
+            if (themeInput.checked) {
+
+                /*
+                 * MODO OSCURO
+                 */
+
+                document.body.classList.remove(
+                    "light-mode"
+                );
+
+                localStorage.setItem(
+                    "airmouse-theme",
+                    "dark"
+                );
+
+
+            } else {
+
+                /*
+                 * MODO CLARO
+                 */
+
+                document.body.classList.add(
+                    "light-mode"
+                );
+
+                localStorage.setItem(
+                    "airmouse-theme",
+                    "light"
+                );
+
+            }
+
+        }
+    );
+
+
+</script>
+```
 
 </body>
 
