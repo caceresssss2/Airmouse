@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 
     <meta charset="UTF-8">
@@ -15,43 +16,164 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: Arial, sans-serif;
             background: #080a0f;
             color: white;
         }
 
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        /* =========================
+           MENÚ
+        ========================= */
+
         nav {
-            padding: 20px 7%;
+            position: sticky;
+            top: 0;
+            width: 100%;
+
+            padding: 18px 7%;
+
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #242833;
+
+            background: rgba(8, 10, 15, 0.95);
+
+            border-bottom: 1px solid #252a35;
+
+            z-index: 1000;
         }
 
         .logo {
             font-size: 24px;
             font-weight: bold;
+            letter-spacing: 1px;
         }
 
         .logo span {
             color: #7c5cff;
         }
 
-        nav a {
-            color: #aaa;
-            text-decoration: none;
+
+        /* =========================
+           MENÚ NORMAL
+        ========================= */
+
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 25px;
         }
+
+        .menu a {
+            color: #a9adb8;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .menu a:hover {
+            color: white;
+        }
+
+
+        /* =========================
+           BOTÓN HAMBURGUESA
+        ========================= */
+
+        .menu-button {
+            display: none;
+
+            width: 42px;
+            height: 42px;
+
+            border: 1px solid #343946;
+            border-radius: 10px;
+
+            background: #10131a;
+
+            cursor: pointer;
+
+            position: relative;
+        }
+
+        .menu-button span {
+            position: absolute;
+
+            width: 20px;
+            height: 2px;
+
+            background: white;
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            transition: 0.3s;
+        }
+
+        .menu-button span:nth-child(1) {
+            top: 13px;
+        }
+
+        .menu-button span:nth-child(2) {
+            top: 20px;
+        }
+
+        .menu-button span:nth-child(3) {
+            top: 27px;
+        }
+
+
+        /* ☰ se transforma en X */
+
+        .menu-button.active span:nth-child(1) {
+            top: 20px;
+
+            transform:
+                translateX(-50%)
+                rotate(45deg);
+        }
+
+        .menu-button.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-button.active span:nth-child(3) {
+            top: 20px;
+
+            transform:
+                translateX(-50%)
+                rotate(-45deg);
+        }
+
+
+        /* =========================
+           CONTENIDO
+        ========================= */
 
         main {
             max-width: 1000px;
+
             margin: auto;
+
             padding: 80px 20px;
+
             text-align: center;
         }
 
         h1 {
             font-size: 50px;
+
             margin-bottom: 15px;
         }
 
@@ -61,25 +183,47 @@
 
         .subtitle {
             color: #999eaa;
+
             margin-bottom: 55px;
+
             font-size: 17px;
         }
 
+
+        /* =========================
+           DISPOSITIVOS
+        ========================= */
+
         .devices {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(220px, 1fr));
+
             gap: 20px;
         }
 
         .device {
             background: #10131a;
+
             border: 1px solid #272c37;
+
             border-radius: 20px;
+
             padding: 35px 20px;
+
+            transition: 0.3s;
+        }
+
+        .device:hover {
+            transform: translateY(-5px);
+
+            border-color: #6250bd;
         }
 
         .icon {
             font-size: 50px;
+
             margin-bottom: 20px;
         }
 
@@ -89,120 +233,401 @@
 
         .device p {
             color: #9297a4;
+
             line-height: 1.7;
         }
 
         .status {
             display: inline-block;
+
             margin-top: 20px;
+
             padding: 6px 12px;
+
             border-radius: 50px;
+
             background: #191d26;
+
             color: #a99cff;
+
             font-size: 12px;
         }
 
+
+        /* =========================
+           BOTÓN VOLVER
+        ========================= */
+
         .back {
             display: inline-block;
+
             margin-top: 50px;
+
             padding: 13px 20px;
+
             background: #7c5cff;
+
             color: white;
-            text-decoration: none;
+
             border-radius: 9px;
+
+            transition: 0.3s;
+        }
+
+        .back:hover {
+            background: #9278ff;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           CELULAR
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 14px 5%;
+            }
+
+
+            /* Menú cerrado */
+
+            .menu {
+                position: absolute;
+
+                top: 100%;
+                left: 0;
+
+                width: 100%;
+
+                display: flex;
+
+                flex-direction: column;
+
+                gap: 0;
+
+                background: rgba(8, 10, 15, 0.98);
+
+                border-bottom: 1px solid #252a35;
+
+                overflow: hidden;
+
+                max-height: 0;
+
+                opacity: 0;
+
+                transition:
+                    max-height 0.35s ease,
+                    opacity 0.25s ease;
+            }
+
+
+            /* Menú abierto */
+
+            .menu.active {
+                max-height: 400px;
+
+                opacity: 1;
+            }
+
+
+            /* Opciones */
+
+            .menu a {
+                width: 100%;
+
+                padding: 17px 25px;
+
+                font-size: 15px;
+
+                border-bottom: 1px solid #1d212a;
+
+                transition: 0.2s;
+            }
+
+            .menu a:hover {
+                background: #11141c;
+
+                color: white;
+
+                padding-left: 32px;
+            }
+
+
+            /* Botón hamburguesa */
+
+            .menu-button {
+                display: block;
+            }
+
+
+            /* Contenido */
+
+            main {
+                padding: 65px 20px;
+            }
+
+            h1 {
+                font-size: 40px;
+            }
+
+            .subtitle {
+                font-size: 16px;
+
+                margin-bottom: 40px;
+            }
+
+            .devices {
+                grid-template-columns: 1fr;
+            }
+
+            .device {
+                padding: 30px 20px;
+            }
+
         }
 
     </style>
 
 </head>
 
+
 <body>
+
+
+<!-- =========================
+     MENÚ
+========================= -->
 
 <nav>
 
+
     <div class="logo">
+
         <span>Air</span>Mouse
+
     </div>
 
-    <a href="index.html">
-        ← Inicio
-    </a>
+
+    <div class="menu" id="menu">
+
+
+        <a href="index.html">
+            Inicio
+        </a>
+
+
+        <a href="proyecto.html">
+            Proyecto
+        </a>
+
+
+        <a href="funcionamiento.html">
+            Funcionamiento
+        </a>
+
+
+        <a href="software.html">
+            Software
+        </a>
+
+
+        <a href="compatibilidad.html">
+            Compatibilidad
+        </a>
+
+
+    </div>
+
+
+    <!-- BOTÓN HAMBURGUESA -->
+
+    <button
+        class="menu-button"
+        id="menuButton"
+        aria-label="Abrir menú"
+    >
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </button>
+
 
 </nav>
 
+
+
+<!-- =========================
+     CONTENIDO
+========================= -->
+
 <main>
 
+
     <h1>
+
         <span>Compatibilidad</span>
+
     </h1>
 
+
     <p class="subtitle">
+
         AirMouse está pensado para funcionar con diferentes
         dispositivos mediante comunicación Bluetooth.
+
     </p>
+
+
 
     <div class="devices">
 
+
         <div class="device">
 
-            <div class="icon">💻</div>
+            <div class="icon">
+                💻
+            </div>
 
-            <h2>PC</h2>
+            <h2>
+                PC
+            </h2>
 
             <p>
+
                 Utilización como dispositivo de entrada mediante
                 Bluetooth HID.
+
             </p>
 
             <span class="status">
+
                 Bluetooth HID
+
             </span>
 
         </div>
 
 
+
         <div class="device">
 
-            <div class="icon">📱</div>
+            <div class="icon">
+                📱
+            </div>
 
-            <h2>Android</h2>
+            <h2>
+                Android
+            </h2>
 
             <p>
+
                 Diseñado para permitir el control de dispositivos
                 Android compatibles.
+
             </p>
 
             <span class="status">
+
                 En desarrollo
+
             </span>
 
         </div>
+
 
 
         <div class="device">
 
-            <div class="icon">📺</div>
+            <div class="icon">
+                📺
+            </div>
 
-            <h2>Android TV</h2>
+            <h2>
+                Android TV
+            </h2>
 
             <p>
+
                 Posibilidad de utilizar AirMouse en televisores
                 y dispositivos Google TV compatibles.
+
             </p>
 
             <span class="status">
+
                 En desarrollo
+
             </span>
 
         </div>
+
 
     </div>
 
-    <a class="back" href="index.html">
+
+
+    <a
+        class="back"
+        href="index.html"
+    >
+
         Volver al inicio
+
     </a>
+
 
 </main>
 
+
+
+<!-- =========================
+     JAVASCRIPT DEL MENÚ
+========================= -->
+
+<script>
+
+    const menuButton =
+        document.getElementById("menuButton");
+
+    const menu =
+        document.getElementById("menu");
+
+
+    menuButton.addEventListener("click", function () {
+
+        menu.classList.toggle("active");
+
+        menuButton.classList.toggle("active");
+
+    });
+
+
+    /* Cerrar menú al seleccionar una página */
+
+    const menuLinks =
+        document.querySelectorAll(".menu a");
+
+
+    menuLinks.forEach(function (link) {
+
+        link.addEventListener("click", function () {
+
+            menu.classList.remove("active");
+
+            menuButton.classList.remove("active");
+
+        });
+
+    });
+
+</script>
+
+
 </body>
-</html>
+
+    </html>
