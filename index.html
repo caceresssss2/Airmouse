@@ -1,3 +1,4 @@
+cat > /home/claude/index.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -31,10 +32,1010 @@
             color: inherit;
         }
 
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid #a899ff;
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
         /* NAVBAR */
 
         nav {
             position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(8, 10, 15, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #20242d;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: opacity 0.25s ease;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
+        }
+
+        .logo span {
+            color: #7c5cff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 4px;
+            color: #b9bdc8;
+            font-size: 14px;
+            transition: color 0.25s ease, transform 0.25s ease;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -4px;
+            height: 2px;
+            background: #7c5cff;
+            border-radius: 2px;
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .nav-links a:hover,
+        .nav-links a:focus-visible {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a:focus-visible::after,
+        .nav-links a.active::after {
+            transform: scaleX(1);
+        }
+
+        .nav-links a.active {
+            color: #ffffff;
+        }
+
+        /* HAMBURGER (mobile menu trigger) */
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            width: 28px;
+            height: 22px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 2px;
+            width: 100%;
+            background: #d6d8df;
+            border-radius: 2px;
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease, background 0.2s ease;
+        }
+
+        .hamburger:hover span {
+            background: #a899ff;
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* MOBILE MENU BACKDROP */
+
+        .menu-backdrop {
+            position: fixed;
+            inset: 0;
+            top: 61px;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 998;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .menu-backdrop.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* PAGES (sections shown/hidden as tabs instead of scroll) */
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .page.active {
+                animation: none;
+            }
+        }
+
+        section.page {
+            padding: 120px 7% 90px;
+            min-height: calc(100vh - 64px);
+        }
+
+        /* HERO / INICIO */
+
+        .hero-top {
+            max-width: 850px;
+            margin: 0 auto 60px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 7px 15px;
+            border: 1px solid #39304f;
+            border-radius: 50px;
+            color: #b8aaff;
+            background: rgba(124, 92, 255, 0.08);
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: clamp(48px, 9vw, 90px);
+            line-height: 0.95;
+            margin-bottom: 20px;
+            letter-spacing: -4px;
+        }
+
+        .gradient {
+            background: linear-gradient(90deg, #ffffff, #a899ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-top p {
+            max-width: 620px;
+            margin: auto;
+            color: #a7abb7;
+            font-size: 18px;
+        }
+
+        .intro-block {
+            max-width: 780px;
+            margin: 0 auto 55px;
+            text-align: center;
+        }
+
+        .intro-block h2 {
+            font-size: 26px;
+            margin-bottom: 14px;
+        }
+
+        .intro-block p {
+            color: #b5b9c4;
+            font-size: 16px;
+        }
+
+        .mini-features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px;
+            max-width: 900px;
+            margin: 0 auto 55px;
+        }
+
+        .mini-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            background: #10131a;
+            border: 1px solid #242833;
+            border-radius: 50px;
+            font-size: 14px;
+            color: #c7cad3;
+            transition: border-color 0.25s ease, transform 0.25s ease;
+        }
+
+        .mini-feature:hover {
+            border-color: #6650c9;
+            transform: translateY(-3px);
+        }
+
+        .mini-feature .icon {
+            font-size: 18px;
+            margin-bottom: 0;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            padding: 14px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .primary {
+            background: #7c5cff;
+            color: white;
+        }
+
+        .primary:hover {
+            transform: translateY(-3px);
+            background: #9075ff;
+        }
+
+        .secondary {
+            border: 1px solid #343946;
+            color: #d6d8df;
+        }
+
+        .secondary:hover {
+            background: #171a22;
+            transform: translateY(-3px);
+        }
+
+        #inicio {
+            background: radial-gradient(circle at 50% 20%, #24185a 0%, #080a0f 55%);
+        }
+
+        /* SECTION TITLES */
+
+        .section-title {
+            text-align: center;
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 50px;
+            color: #969ba8;
+        }
+
+        /* ABOUT */
+
+        .about {
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .about p {
+            color: #b5b9c4;
+            font-size: 17px;
+        }
+
+        .block-divider {
+            max-width: 1100px;
+            margin: 70px auto 50px;
+            border: none;
+            border-top: 1px solid #20242d;
+        }
+
+        /* CARDS */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .card {
+            padding: 30px;
+            background: #10131a;
+            border: 1px solid #242833;
+            border-radius: 18px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #6650c9;
+        }
+
+        .icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #9297a4;
+            font-size: 14px;
+        }
+
+        /* HOW IT WORKS */
+
+        .process {
+            max-width: 1000px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            text-align: center;
+        }
+
+        .step {
+            padding: 25px 15px;
+            background: #0f1218;
+            border-radius: 15px;
+            border: 1px solid #232732;
+            transition: 0.3s;
+        }
+
+        .step:hover {
+            transform: translateY(-4px);
+            border-color: #6650c9;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #7c5cff;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+
+        .step p {
+            color: #969ba8;
+            font-size: 14px;
+        }
+
+        /* SOFTWARE */
+
+        .software {
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+            padding: 50px 30px;
+            background: linear-gradient(145deg, #141122, #0e1016);
+            border: 1px solid #332b52;
+            border-radius: 25px;
+        }
+
+        .software h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .software p {
+            color: #a0a4b0;
+            margin-bottom: 25px;
+        }
+
+        .download {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #7c5cff;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .download:hover {
+            transform: scale(1.04);
+        }
+
+        .version {
+            display: block;
+            margin-top: 15px;
+            color: #737887;
+            font-size: 12px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid #20242d;
+            color: #777c89;
+            font-size: 13px;
+        }
+
+        /* TABLET / SMALL LAPTOP */
+
+        @media (max-width: 900px) {
+            .nav-links {
+                gap: 18px;
+            }
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 650px) {
+
+            .hamburger {
+                display: flex;
+            }
+
+            nav {
+                padding: 16px 5%;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 61px;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                gap: 0;
+                background: #0b0e15;
+                border-bottom: 1px solid #20242d;
+                max-height: 0;
+                overflow: hidden;
+                z-index: 999;
+                transition: max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+            }
+
+            .nav-links.open {
+                max-height: 360px;
+            }
+
+            .nav-links a {
+                padding: 16px 5%;
+                border-top: 1px solid #181b22;
+                opacity: 0;
+                transform: translateX(-16px);
+                transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease, color 0.2s ease;
+            }
+
+            .nav-links.open a {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            .nav-links.open a:nth-child(1) { transition-delay: 0.05s; }
+            .nav-links.open a:nth-child(2) { transition-delay: 0.1s; }
+            .nav-links.open a:nth-child(3) { transition-delay: 0.15s; }
+            .nav-links.open a:nth-child(4) { transition-delay: 0.2s; }
+            .nav-links.open a:nth-child(5) { transition-delay: 0.25s; }
+
+            .nav-links a.active {
+                background: rgba(124, 92, 255, 0.12);
+            }
+
+            .nav-links a.active::after {
+                display: none;
+            }
+
+            section.page {
+                padding: 100px 6% 60px;
+            }
+
+            .hero-top p {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 30px;
+            }
+        }
+
+        /* LARGE SCREENS / TV (10-foot viewing, remote or focus navigation) */
+
+        @media (min-width: 1500px) {
+
+            nav {
+                padding: 24px 6%;
+            }
+
+            .logo {
+                font-size: 28px;
+            }
+
+            .nav-links {
+                gap: 44px;
+            }
+
+            .nav-links a {
+                font-size: 19px;
+            }
+
+            section.page {
+                padding: 160px 10% 110px;
+            }
+
+            .hero-top p,
+            .intro-block p {
+                font-size: 22px;
+            }
+
+            .intro-block h2 {
+                font-size: 32px;
+            }
+
+            .mini-feature {
+                font-size: 17px;
+                padding: 16px 26px;
+            }
+
+            .section-subtitle {
+                font-size: 19px;
+                max-width: 780px;
+            }
+
+            .card,
+            .step {
+                padding: 40px;
+            }
+
+            .card h3,
+            .step h3 {
+                font-size: 22px;
+            }
+
+            .card p,
+            .step p {
+                font-size: 16px;
+            }
+
+            .button {
+                padding: 18px 34px;
+                font-size: 17px;
+            }
+
+            a:focus-visible,
+            button:focus-visible {
+                outline-width: 3px;
+                outline-offset: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+        <a href="#inicio" class="logo" data-page="inicio">
+            <span>Air</span>Mouse
+        </a>
+
+        <div class="nav-links" id="navLinks">
+            <a href="#inicio" data-page="inicio">Inicio</a>
+            <a href="#proyecto" data-page="proyecto">Proyecto</a>
+            <a href="#funcionamiento" data-page="funcionamiento">Funcionamiento</a>
+            <a href="#software" data-page="software">Software</a>
+            <a href="#compatibilidad" data-page="compatibilidad">Compatibilidad</a>
+        </div>
+
+        <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <div class="menu-backdrop" id="menuBackdrop"></div>
+
+
+    <!-- INICIO -->
+
+    <section class="page" id="inicio">
+
+        <div class="hero-top">
+
+            <div class="badge">
+                Ratón aéreo inalámbrico
+            </div>
+
+            <h1>
+                <span class="gradient">AirMouse</span>
+            </h1>
+
+            <p>
+                Una nueva forma de interactuar con tus dispositivos.
+                Controlá el cursor mediante movimientos naturales utilizando
+                tecnología inercial y comunicación inalámbrica.
+            </p>
+
+        </div>
+
+        <div class="intro-block">
+            <h2>¿Qué es AirMouse?</h2>
+            <p>
+                AirMouse convierte el movimiento de tu mano en el control de
+                tu dispositivo. Un sensor MPU6050 montado sobre el dedo
+                índice detecta cada gesto, un ESP32 lo procesa aplicando
+                filtros de zona muerta para evitar falsos movimientos, y todo
+                se transmite por Bluetooth BLE como dispositivo HID: no hace
+                falta instalar ningún programa para empezar a usarlo.
+            </p>
+        </div>
+
+        <div class="mini-features">
+            <div class="mini-feature">
+                <span class="icon">🎯</span>
+                Precisión
+            </div>
+            <div class="mini-feature">
+                <span class="icon">🔵</span>
+                Inalámbrico
+            </div>
+            <div class="mini-feature">
+                <span class="icon">⚙</span>
+                Personalizable
+            </div>
+            <div class="mini-feature">
+                <span class="icon">♿</span>
+                Accesible
+            </div>
+        </div>
+
+        <div class="buttons">
+
+            <a href="#proyecto" data-page="proyecto" class="button primary">
+                Conocer el proyecto
+            </a>
+
+            <a href="#funcionamiento" data-page="funcionamiento" class="button secondary">
+                Ver cómo funciona
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROYECTO -->
+
+    <section class="page" id="proyecto">
+
+        <div class="about">
+
+            <h2 class="section-title">
+                ¿Qué es AirMouse?
+            </h2>
+
+            <p class="section-subtitle">
+                Tecnología pensada para crear una forma alternativa,
+                intuitiva y personalizable de controlar dispositivos.
+            </p>
+
+            <p>
+                AirMouse es un ratón aéreo inalámbrico basado en sistemas
+                embebidos e interfaces inerciales. Utiliza un sensor
+                MPU6050 para detectar los movimientos de la mano y un
+                microcontrolador ESP32 para procesar y transmitir las
+                acciones mediante Bluetooth.
+            </p>
+
+        </div>
+
+        <hr class="block-divider">
+
+        <h2 class="section-title">
+            Diseñado para adaptarse
+        </h2>
+
+        <p class="section-subtitle">
+            AirMouse busca reducir la exigencia física y ofrecer
+            configuraciones adaptables a diferentes usuarios.
+        </p>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="icon">🎯</div>
+                <h3>Precisión</h3>
+                <p>
+                    Detecta los movimientos mediante una unidad
+                    de medición inercial.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🔵</div>
+                <h3>Inalámbrico</h3>
+                <p>
+                    Comunicación Bluetooth para interactuar
+                    sin cables.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">⚙</div>
+                <h3>Personalizable</h3>
+                <p>
+                    Configuraciones adaptables para diferentes
+                    necesidades y preferencias.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">♿</div>
+                <h3>Accesibilidad</h3>
+                <p>
+                    Pensado como una alternativa de interacción
+                    con baja exigencia motriz.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FUNCIONAMIENTO -->
+
+    <section class="page" id="funcionamiento">
+
+        <h2 class="section-title">
+            ¿Cómo funciona?
+        </h2>
+
+        <p class="section-subtitle">
+            Del movimiento de tu mano al control de tu dispositivo.
+        </p>
+
+        <div class="process">
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Movimiento</h3>
+                <p>
+                    El usuario mueve la mano.
+                </p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>MPU6050</h3>
+                <p>
+                    El sensor detecta la orientación y movimiento.
+                </p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>ESP32</h3>
+                <p>
+                    Procesa la información recibida.
+                </p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Bluetooth</h3>
+                <p>
+                    Envía las acciones al dispositivo.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SOFTWARE -->
+
+    <section class="page" id="software">
+
+        <div class="software">
+
+            <h2>
+                AirMouse Software
+            </h2>
+
+            <p>
+                Configurá y personalizá tu AirMouse desde nuestro
+                software dedicado.
+            </p>
+
+            <!-- CAMBIAR ESTE ENLACE CUANDO SUBAMOS EL SOFTWARE -->
+
+            <a href="#" class="download">
+                ⬇ Descargar software
+            </a>
+
+            <span class="version">
+                Próximamente · Windows
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- COMPATIBILIDAD -->
+
+    <section class="page" id="compatibilidad">
+
+        <h2 class="section-title">
+            Compatibilidad
+        </h2>
+
+        <p class="section-subtitle">
+            El objetivo de AirMouse es ofrecer una experiencia
+            multiplataforma.
+        </p>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="icon">💻</div>
+                <h3>PC</h3>
+                <p>
+                    Compatible con computadoras mediante Bluetooth HID.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">📱</div>
+                <h3>Android</h3>
+                <p>
+                    Diseñado para permitir interacción con dispositivos Android.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">📺</div>
+                <h3>Android TV</h3>
+                <p>
+                    Posibilidad de utilizar AirMouse con televisores
+                    y dispositivos Google TV compatibles.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 AirMouse Project
+        </p>
+
+        <p>
+            Ratón Aéreo Inalámbrico Basado en Sistemas Embebidos
+            e Interfaces Inerciales
+        </p>
+
+    </footer>
+
+
+    <script>
+        (function () {
+            var pages = document.querySelectorAll('.page');
+            var navAnchors = document.querySelectorAll('[data-page]');
+            var navLinks = document.getElementById('navLinks');
+            var hamburger = document.getElementById('hamburger');
+            var backdrop = document.getElementById('menuBackdrop');
+
+            function closeMobileMenu() {
+                navLinks.classList.remove('open');
+                hamburger.classList.remove('open');
+                backdrop.classList.remove('open');
+                hamburger.setAttribute('aria-expanded', 'false');
+            }
+
+            function showPage(id, pushState) {
+                var target = document.getElementById(id);
+                if (!target || !target.classList.contains('page')) {
+                    id = 'inicio';
+                    target = document.getElementById('inicio');
+                }
+
+                pages.forEach(function (page) {
+                    page.classList.toggle('active', page === target);
+                });
+
+                document.querySelectorAll('.nav-links a').forEach(function (a) {
+                    var isMatch = a.dataset.page === id;
+                    a.classList.toggle('active', isMatch);
+                    if (isMatch) {
+                        a.setAttribute('aria-current', 'page');
+                    } else {
+                        a.removeAttribute('aria-current');
+                    }
+                });
+
+                if (pushState) {
+                    history.pushState(null, '', '#' + id);
+                }
+
+                window.scrollTo(0, 0);
+                closeMobileMenu();
+            }
+
+            navAnchors.forEach(function (el) {
+                el.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    showPage(el.dataset.page, true);
+                });
+            });
+
+            hamburger.addEventListener('click', function () {
+                var isOpen = navLinks.classList.toggle('open');
+                hamburger.classList.toggle('open', isOpen);
+                backdrop.classList.toggle('open', isOpen);
+                hamburger.setAttribute('aria-expanded', String(isOpen));
+            });
+
+            backdrop.addEventListener('click', closeMobileMenu);
+
+            window.addEventListener('popstate', function () {
+                var id = location.hash.replace('#', '') || 'inicio';
+                showPage(id, false);
+            });
+
+            var initialId = location.hash.replace('#', '') || 'inicio';
+            showPage(initialId, false);
+        })();
+    </script>
+
+</body>
+</html>
+HTMLEOF
+echo "OK"            position: fixed;
             top: 0;
             width: 100%;
             padding: 18px 7%;
