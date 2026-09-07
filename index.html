@@ -33,6 +33,7 @@
             color: inherit;
         }
 
+
         /* =========================
            MENÚ
         ========================= */
@@ -41,7 +42,9 @@
             position: sticky;
             top: 0;
             width: 100%;
+
             padding: 18px 7%;
+
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -65,6 +68,7 @@
 
         .menu {
             display: flex;
+            align-items: center;
             gap: 25px;
         }
 
@@ -77,6 +81,72 @@
         .menu a:hover {
             color: white;
         }
+
+
+        /* =========================
+           BOTÓN HAMBURGUESA
+        ========================= */
+
+        .menu-button {
+            display: none;
+
+            width: 42px;
+            height: 42px;
+
+            border: 1px solid #343946;
+            border-radius: 10px;
+
+            background: #10131a;
+
+            cursor: pointer;
+
+            position: relative;
+        }
+
+        .menu-button span {
+            position: absolute;
+
+            width: 20px;
+            height: 2px;
+
+            background: white;
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            transition: 0.3s;
+        }
+
+        .menu-button span:nth-child(1) {
+            top: 13px;
+        }
+
+        .menu-button span:nth-child(2) {
+            top: 20px;
+        }
+
+        .menu-button span:nth-child(3) {
+            top: 27px;
+        }
+
+
+        /* Animación del botón */
+
+        .menu-button.active span:nth-child(1) {
+            top: 20px;
+            transform: translateX(-50%) rotate(45deg);
+        }
+
+        .menu-button.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-button.active span:nth-child(3) {
+            top: 20px;
+            transform: translateX(-50%) rotate(-45deg);
+        }
+
 
         /* =========================
            HERO
@@ -154,6 +224,7 @@
             font-size: 18px;
         }
 
+
         /* =========================
            BOTONES
         ========================= */
@@ -200,6 +271,7 @@
             background: #171a22;
         }
 
+
         /* =========================
            SECCIÓN PRESENTACIÓN
         ========================= */
@@ -231,6 +303,7 @@
 
             font-size: 17px;
         }
+
 
         /* =========================
            TARJETAS
@@ -295,6 +368,7 @@
             font-size: 14px;
         }
 
+
         /* =========================
            FOOTER
         ========================= */
@@ -311,6 +385,7 @@
             font-size: 13px;
         }
 
+
         /* =========================
            CELULAR
         ========================= */
@@ -318,23 +393,122 @@
         @media (max-width: 700px) {
 
             nav {
-                padding: 16px 5%;
+                padding: 14px 5%;
             }
+
+            /* Ocultamos el menú normal */
 
             .menu {
-                gap: 12px;
+                position: absolute;
+
+                top: 100%;
+                left: 0;
+
+                width: 100%;
+
+                display: flex;
+                flex-direction: column;
+
+                gap: 0;
+
+                background: rgba(8, 10, 15, 0.98);
+
+                border-bottom: 1px solid #252a35;
+
+                overflow: hidden;
+
+                max-height: 0;
+
+                opacity: 0;
+
+                transition:
+                    max-height 0.35s ease,
+                    opacity 0.25s ease;
             }
+
+
+            /* Menú abierto */
+
+            .menu.active {
+                max-height: 400px;
+
+                opacity: 1;
+            }
+
+
+            /* Enlaces */
 
             .menu a {
-                font-size: 11px;
+                width: 100%;
+
+                padding: 17px 25px;
+
+                font-size: 15px;
+
+                border-bottom: 1px solid #1d212a;
+
+                transition: 0.2s;
             }
 
+            .menu a:hover {
+                background: #11141c;
+
+                color: white;
+
+                padding-left: 32px;
+            }
+
+
+            /* Mostramos el botón */
+
+            .menu-button {
+                display: block;
+            }
+
+
+            /* Ajustes del título */
+
             h1 {
+                font-size: clamp(55px, 18vw, 90px);
+
                 letter-spacing: -4px;
+            }
+
+            .hero {
+                min-height: 85vh;
+
+                padding: 60px 20px;
             }
 
             .hero p {
                 font-size: 16px;
+            }
+
+            .buttons {
+                flex-direction: column;
+
+                align-items: stretch;
+
+                max-width: 300px;
+
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .button {
+                text-align: center;
+            }
+
+            .intro {
+                padding: 80px 7%;
+            }
+
+            .intro h2 {
+                font-size: 30px;
+            }
+
+            .features {
+                padding: 40px 7% 80px;
             }
 
         }
@@ -360,7 +534,7 @@
     </div>
 
 
-    <div class="menu">
+    <div class="menu" id="menu">
 
         <a href="index.html">
             Inicio
@@ -383,6 +557,21 @@
         </a>
 
     </div>
+
+
+    <!-- BOTÓN HAMBURGUESA -->
+
+    <button
+        class="menu-button"
+        id="menuButton"
+        aria-label="Abrir menú"
+    >
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </button>
 
 </nav>
 
@@ -590,6 +779,46 @@
     </p>
 
 </footer>
+
+
+
+<!-- =========================
+     JAVASCRIPT MENÚ
+========================= -->
+
+<script>
+
+    const menuButton = document.getElementById("menuButton");
+    const menu = document.getElementById("menu");
+
+
+    menuButton.addEventListener("click", function () {
+
+        menu.classList.toggle("active");
+
+        menuButton.classList.toggle("active");
+
+    });
+
+
+    /* Cerrar el menú cuando se toca una opción */
+
+    const menuLinks = document.querySelectorAll(".menu a");
+
+
+    menuLinks.forEach(function (link) {
+
+        link.addEventListener("click", function () {
+
+            menu.classList.remove("active");
+
+            menuButton.classList.remove("active");
+
+        });
+
+    });
+
+</script>
 
 
 </body>
