@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Compatibilidad | AirMouse</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #080a0f;
+            color: white;
+        }
+
+        nav {
+            padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #242833;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #7c5cff;
+        }
+
+        nav a {
+            color: #aaa;
+            text-decoration: none;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: auto;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        h1 span {
+            color: #7c5cff;
+        }
+
+        .subtitle {
+            color: #999eaa;
+            margin-bottom: 55px;
+            font-size: 17px;
+        }
+
+        .devices {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .device {
+            background: #10131a;
+            border: 1px solid #272c37;
+            border-radius: 20px;
+            padding: 35px 20px;
+        }
+
+        .icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        .device h2 {
+            margin-bottom: 12px;
+        }
+
+        .device p {
+            color: #9297a4;
+            line-height: 1.7;
+        }
+
+        .status {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 6px 12px;
+            border-radius: 50px;
+            background: #191d26;
+            color: #a99cff;
+            font-size: 12px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 50px;
+            padding: 13px 20px;
+            background: #7c5cff;
+            color: white;
+            text-decoration: none;
+            border-radius: 9px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<nav>
+
+    <div class="logo">
+        <span>Air</span>Mouse
+    </div>
+
+    <a href="index.html">
+        ← Inicio
+    </a>
+
+</nav>
+
+<main>
+
+    <h1>
+        <span>Compatibilidad</span>
+    </h1>
+
+    <p class="subtitle">
+        AirMouse está pensado para funcionar con diferentes
+        dispositivos mediante comunicación Bluetooth.
+    </p>
+
+    <div class="devices">
+
+        <div class="device">
+
+            <div class="icon">💻</div>
+
+            <h2>PC</h2>
+
+            <p>
+                Utilización como dispositivo de entrada mediante
+                Bluetooth HID.
+            </p>
+
+            <span class="status">
+                Bluetooth HID
+            </span>
+
+        </div>
+
+
+        <div class="device">
+
+            <div class="icon">📱</div>
+
+            <h2>Android</h2>
+
+            <p>
+                Diseñado para permitir el control de dispositivos
+                Android compatibles.
+            </p>
+
+            <span class="status">
+                En desarrollo
+            </span>
+
+        </div>
+
+
+        <div class="device">
+
+            <div class="icon">📺</div>
+
+            <h2>Android TV</h2>
+
+            <p>
+                Posibilidad de utilizar AirMouse en televisores
+                y dispositivos Google TV compatibles.
+            </p>
+
+            <span class="status">
+                En desarrollo
+            </span>
+
+        </div>
+
+    </div>
+
+    <a class="back" href="index.html">
+        Volver al inicio
+    </a>
+
+</main>
+
+</body>
+</html>
